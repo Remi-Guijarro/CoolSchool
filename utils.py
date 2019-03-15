@@ -20,6 +20,4 @@ def get_subjects():
             line["theme"]=row[2]
             line["structure"]=row[3]
             objectsList.append(line)
-        print(objectsList)
-
-get_subjects()
+    return objectsList
