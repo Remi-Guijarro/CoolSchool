@@ -8,16 +8,12 @@ def compute_stat(user_name):
 def save():
     print("writing file")
 
-#return a list of objects ( dictionnary )
-def get_subjects():
-    objectsList=[]
-    with open('subjects.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=',')
-        for row in csv_reader:
-            line={}
-            line["subject"]=row[0]
-            line["chapter"]=row[1]
-            line["theme"]=row[2]
-            line["structure"]=row[3]
-            objectsList.append(line)
-    return objectsList
+def init():
+    chapitre=[]
+    chapitre.append(("Second degrés",0))
+    chapitre.append(("intégrale",0))
+    souschapitre_integrale=[]
+    souschapitre_integrale.append(("puissance",0))
+    souschapitre_integrale.append(("trigonométrique",0))
+    souschapitre_integrale.append(("logarithmique",0))
+    return (chapitre,souschapitre_integrale)
