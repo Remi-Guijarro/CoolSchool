@@ -12,6 +12,28 @@ def constructIntitileProbaArrays(intitules,probas):
 			intitules_proba_chapters.append((intitules[i],probas[i]))
 	return (intitule_proba_mat,intitules_proba_chapters)
 
+def constructIntituleMa(array):
+	matArray=[]
+	matMap={}
+	for intitule in array:
+		if("M_" in intitule):
+			matArray.append(intitule[2:])
+			matMap[intitule[2:]] = 0
+			array.remove(intitule)
+	return (matArray,matMap)
+
+def constructIntituleChapters(array,matarray):
+	chaptersMap={}
+	for intitule in array:
+		for mat  in matarray:
+			if(mat in intitule):
+				if(mat in chaptersMap):
+					chaptersMap[mat][intitule] = 0
+				else:
+					chaptersMap[mat] = {}
+					chaptersMap[mat][intitule] = 0
+	return chaptersMap
+
 def randSubject(fonction_repart_mat):
 	print(fonction_repart_mat)
 	
@@ -28,21 +50,26 @@ def randQuestion(theme):
 def exam_session(fonction_repart_mat,fonction_repart_chapters):
 	printInformation("Running in exam mode")
 	randSubject(fonction_repart_mat)
+	print(fonction_repart_chapters)
 
 def trainning_session(fonction_repart_mat,fonction_repart_chapters):
 	printInformation("Running in trainning mode")
 
 def run():
 	mode = chooseMode()
-	intitules=("M_Polynome","\tSecond degre","M_Integrales","\tFonctions puissance","\tFonctions trigonometriques","\tFonctions logarithmiques")
-	probabilites = chooseProbabilities(intitules)
-	intitule_proba_mat,	intitules_proba_chapters=constructIntitileProbaArrays(intitules,probabilites)	
-	fonction_repatition_mat=func_repart(intitule_proba_mat)
-	fonction_repatition_sousChap=func_repart(intitules_proba_chapters)
+	intitules=["M_Polynome","\t Polynome_Second degre","M_Integrales","\t Integrales_Fonctions puissance","\t Integrales_Fonctions trigonometriques","\t Integrales_Fonctions logarithmiques"]
+	subjectsArray,subjectsMap=constructIntituleMa(intitules)
+	chaptersMap= constructIntituleChapters(intitules,subjectsArray)
+	subjectsMap = chooseSubjectProbabilities(subjectsMap)
+	chaptersMap = chooseChapterProbabilities(chaptersMap)
 
-	if(mode):
-		exam_session(fonction_repatition_mat,fonction_repatition_sousChap)
-	else:
-		trainning_session(fonction_repatition_mat,fonction_repatition_sousChap)
+	# intitule_proba_mat,	intitules_proba_chapters=constructIntitileProbaArrays(intitules,probabilites)	
+	# fonction_repatition_mat=func_repart(intitule_proba_mat)
+	# fonction_repatition_sousChap=func_repart(intitules_proba_chapters)
+
+	# if(mode):
+	# 	exam_session(fonction_repatition_mat,fonction_repatition_sousChap)
+	# else:
+	# 	trainning_session(fonction_repatition_mat,fonction_repatition_sousChap)
 
 run()

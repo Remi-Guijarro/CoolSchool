@@ -27,17 +27,22 @@ def displayDifferentchoice(n_uplet):
         else:
             print(intitule)
 
-def chooseProbabilities(n_uplet):
-    lp=[]
-    displayDifferentchoice(n_uplet)
-    for intitule in n_uplet:
-        if "M_" in intitule: 
-            proba = input("Choose the propabilities for the subject : " + intitule[2:] + " :> ")
-            lp.append(proba)
-        else:
-            proba = input("Choose the propabilities for the chapter : " + intitule + " :> ")
-            lp.append(proba)
-    return lp
+def chooseSubjectProbabilities(map):
+    displayDifferentchoice(map)
+    for key, value in map.items():
+        proba = input("Choose the propabilities for the subject : " + key + " :> ")
+        map[key] = proba
+    return map
+
+
+def chooseChapterProbabilities(map):
+    # displayDifferentchoice(map)
+    for key, value in map.items():
+        for keyy, valuee in value.items():
+            proba = input("Choose the propabilities for the subject : " + keyy + " :> ")
+            value[keyy] = proba
+    return map
+
 
 def  printInformation(message):
     print(Fore.CYAN + MSG_PREFIX + message + MSG_SUFFIX + "\n")
