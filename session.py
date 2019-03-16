@@ -13,7 +13,8 @@ def constructIntitileProbaArrays(intitules,probas):
 	return (intitule_proba_mat,intitules_proba_chapters)
 
 def randSubject(fonction_repart_mat):
-	return "choosen subject"
+	print(fonction_repart_mat)
+	
 
 def randchapters(fonction_repart_chapters):
 	return "choosen chapters"
@@ -26,6 +27,7 @@ def randQuestion(theme):
 
 def exam_session(fonction_repart_mat,fonction_repart_chapters):
 	printInformation("Running in exam mode")
+	randSubject(fonction_repart_mat)
 
 def trainning_session(fonction_repart_mat,fonction_repart_chapters):
 	printInformation("Running in trainning mode")
