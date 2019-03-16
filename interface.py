@@ -19,12 +19,24 @@ def chooseMode():
             printError("The given mode does not exist" )
     return mode
 
+def displayDifferentchoice(n_uplet):
+    printHelp("\n Please Enter the probabilities of each subjects and chapters : \n \t -Note that if you put 0 on a SUBJECT or a CHAPTER, no questions will be asked you about that subject \n  Theses are the possible choices \n")
+    for intitule in n_uplet:
+        if "M_" in intitule: 
+            print(intitule[2:])
+        else:
+            print(intitule)
 
 def chooseProbabilities(n_uplet):
     lp=[]
+    displayDifferentchoice(n_uplet)
     for intitule in n_uplet:
-        proba = input("Choose the propabilities for : " + intitule)
-        lp.append(proba)
+        if "M_" in intitule: 
+            proba = input("Choose the propabilities for the subject : " + intitule[2:] + " :> ")
+            lp.append(proba)
+        else:
+            proba = input("Choose the propabilities for the chapter : " + intitule + " :> ")
+            lp.append(proba)
     return lp
 
 def  printInformation(message):
@@ -37,4 +49,8 @@ def printError(message):
 
 def printWarning(message):
     print(Fore.YELLOW + MSG_PREFIX + message + MSG_SUFFIX + "\n")
+    print(Fore.RESET)
+
+def printHelp(message):
+    print(Fore.LIGHTGREEN_EX + MSG_PREFIX + message + MSG_SUFFIX + "\n")
     print(Fore.RESET)
