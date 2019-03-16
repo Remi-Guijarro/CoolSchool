@@ -3,7 +3,6 @@ import random
 
 def func_repart(intitules_proba):
     intitules_proba.sort(key = operator.itemgetter(1))
-    print(intitules_proba)
     repartition=[]
     for i in range(0, len(intitules_proba)):
         repartition.append(get_coef_cumul(intitules_proba,i)/get_coef_cumul(intitules_proba,len(intitules_proba)))
