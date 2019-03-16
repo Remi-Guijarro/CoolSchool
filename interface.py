@@ -38,7 +38,7 @@ def chooseSubjectProbabilities(map):
 def chooseChapterProbabilities(mapchapters,mapSubject):
     for key, value in mapchapters.items():
         for keyy, valuee in value.items():
-            if(int(mapSubject[key]) != 0):                
+            if(float(mapSubject[key]) != 0):                
                 print(key)
                 proba = input("Choose the propabilities for the subject : " + keyy + " :> ")
                 value[keyy] = proba

@@ -34,8 +34,16 @@ def constructIntituleChapters(array,matarray):
 					chaptersMap[mat][intitule] = 0
 	return chaptersMap
 
-def randSubject(fonction_repart_mat):
-	print(fonction_repart_mat)
+def randSubject(subjectsMap):
+	orderedCollec = collections.OrderedDict(sorted(subjectsMap.items(), key=lambda kv: kv[1]))
+	randnb = get_rand()
+	cpt=0
+	func_repart_sub=func_repart(orderedCollec)
+	for key,value in orderedCollec.items():
+		if(func_repart_sub[cpt] >= randnb):
+			return key 
+		else:
+			cpt+=1
 	
 
 def randchapters(fonction_repart_chapters):
@@ -49,11 +57,28 @@ def randQuestion(theme):
 
 def exam_session(subjectsMap,chaptersMap):
 	printInformation("Running in exam mode")
-	# randSubject(subjectsMap)
-	# print(chaptersMap)
+	#cpt_i=0.0
+	#cpt_p=0.0
+	for i in range(0,20):
+		print(randSubject(subjectsMap))
+		# TO DO : Implement the choose of the chapters acccording to the subject		
+		# ======= This was on a test purpose ========	
+		# if(m == "Integrales"):
+		# 	cpt_i+=1
+		# else:
+		# 	cpt_p+=1
+	# print("proba Integral = ",cpt_i/5000)
+	# print("proba Integral = ",cpt_p/5000)
 
 def trainning_session(subjectsMap,chaptersMap):
 	printInformation("Running in trainning mode")
+	userInput=""
+	while(True):
+		if(userInput == "QUIT"):
+			break		
+		print(randSubject(subjectsMap))
+		userInput = input("your Anwer :> ")
+		# TO DO : Implement the choose of the chapters acccording to the subject		
 
 def run():
 	mode = chooseMode()
@@ -62,11 +87,6 @@ def run():
 	chaptersMap= constructIntituleChapters(intitules,subjectsArray)
 	subjectsMap = chooseSubjectProbabilities(subjectsMap)
 	chaptersMap = chooseChapterProbabilities(chaptersMap,subjectsMap)
-	print(chaptersMap)
-	# intitule_proba_mat,	intitules_proba_chapters=constructIntitileProbaArrays(intitules,probabilites)	
-	# fonction_repatition_mat=func_repart(intitule_proba_mat)
-	# fonction_repatition_sousChap=func_repart(intitules_proba_chapters)
-
 	if(mode):
 		exam_session(subjectsMap,chaptersMap)
 	else:

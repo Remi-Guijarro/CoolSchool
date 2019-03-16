@@ -1,18 +1,21 @@
 import operator
 import random
+import collections
 
-def func_repart(intitules_proba):
-    intitules_proba.sort(key = operator.itemgetter(1))
+def func_repart(orederedCollec):
     repartition=[]
-    for i in range(0, len(intitules_proba)):
-        repartition.append(get_coef_cumul(intitules_proba,i))
+    for key,value in orederedCollec.items():        
+        repartition.append(get_coef_cumul(orederedCollec,key))
     return repartition
 
-def get_coef_cumul(intitules_proba, index):
+def get_coef_cumul(orederedCollec, key):
     coef_cumul = 0
-    for i in range(0, index+1):
-        coef_cumul = coef_cumul + float(intitules_proba[i][1])
-    return coef_cumul
+    for keyy, value in orederedCollec.items():
+        if(keyy == key):
+            coef_cumul = coef_cumul + float(orederedCollec[keyy])
+            return coef_cumul
+        else:
+            coef_cumul = coef_cumul + float(orederedCollec[keyy])
 
 
 def get_rand():
