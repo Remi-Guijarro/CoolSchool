@@ -35,13 +35,14 @@ def chooseSubjectProbabilities(map):
     return map
 
 
-def chooseChapterProbabilities(map):
-    # displayDifferentchoice(map)
-    for key, value in map.items():
+def chooseChapterProbabilities(mapchapters,mapSubject):
+    for key, value in mapchapters.items():
         for keyy, valuee in value.items():
-            proba = input("Choose the propabilities for the subject : " + keyy + " :> ")
-            value[keyy] = proba
-    return map
+            if(int(mapSubject[key]) != 0):                
+                print(key)
+                proba = input("Choose the propabilities for the subject : " + keyy + " :> ")
+                value[keyy] = proba
+    return mapchapters
 
 
 def  printInformation(message):

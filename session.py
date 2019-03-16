@@ -47,12 +47,12 @@ def randQuestion(theme):
 	elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
 		return "ax^2+bx+c"
 
-def exam_session(fonction_repart_mat,fonction_repart_chapters):
+def exam_session(subjectsMap,chaptersMap):
 	printInformation("Running in exam mode")
-	randSubject(fonction_repart_mat)
-	print(fonction_repart_chapters)
+	# randSubject(subjectsMap)
+	# print(chaptersMap)
 
-def trainning_session(fonction_repart_mat,fonction_repart_chapters):
+def trainning_session(subjectsMap,chaptersMap):
 	printInformation("Running in trainning mode")
 
 def run():
@@ -61,15 +61,15 @@ def run():
 	subjectsArray,subjectsMap=constructIntituleMa(intitules)
 	chaptersMap= constructIntituleChapters(intitules,subjectsArray)
 	subjectsMap = chooseSubjectProbabilities(subjectsMap)
-	chaptersMap = chooseChapterProbabilities(chaptersMap)
-
+	chaptersMap = chooseChapterProbabilities(chaptersMap,subjectsMap)
+	print(chaptersMap)
 	# intitule_proba_mat,	intitules_proba_chapters=constructIntitileProbaArrays(intitules,probabilites)	
 	# fonction_repatition_mat=func_repart(intitule_proba_mat)
 	# fonction_repatition_sousChap=func_repart(intitules_proba_chapters)
 
-	# if(mode):
-	# 	exam_session(fonction_repatition_mat,fonction_repatition_sousChap)
-	# else:
-	# 	trainning_session(fonction_repatition_mat,fonction_repatition_sousChap)
+	if(mode):
+		exam_session(subjectsMap,chaptersMap)
+	else:
+		trainning_session(subjectsMap,chaptersMap)
 
 run()
