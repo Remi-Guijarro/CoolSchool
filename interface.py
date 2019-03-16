@@ -19,6 +19,8 @@ def chooseMode():
             printError("The given mode does not exist" )
     return mode
 
+# Print the possible possible choice about (subjects) and 
+# Todo : for the Chapters
 def displayDifferentchoice(n_uplet):
     printHelp("\n Please Enter the probabilities of each subjects and chapters : \n \t -Note that if you put 0 on a SUBJECT or a CHAPTER, no questions will be asked you about that subject \n  Theses are the possible choices \n")
     for intitule in n_uplet:
@@ -27,6 +29,8 @@ def displayDifferentchoice(n_uplet):
         else:
             print(intitule)
 
+# Ask the user to define the probabilities for the subjects
+# Return a dictionnary <Subject, probability>
 def chooseSubjectProbabilities(map):
     displayDifferentchoice(map)
     for key, value in map.items():
@@ -34,29 +38,33 @@ def chooseSubjectProbabilities(map):
         map[key] = proba
     return map
 
-
+# Ask the user to define the probabilities for the chapters
+# Return a dictionnary <Subject,<chapter, probability>>
 def chooseChapterProbabilities(mapchapters,mapSubject):
     for key, value in mapchapters.items():
         for keyy, valuee in value.items():
             if(float(mapSubject[key]) != 0):                
                 print(key)
-                proba = input("Choose the propabilities for the subject : " + keyy + " :> ")
+                proba = input("Choose the propabilities for the chapter : " + keyy + " :> ")
                 value[keyy] = proba
     return mapchapters
 
-
-def  printInformation(message):
+# Print an Information message (COLOR = CYAN)
+def printInformation(message):
     print(Fore.CYAN + MSG_PREFIX + message + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
+# Print a Error message (COLOR = RED)
 def printError(message):
     print(Fore.RED + MSG_PREFIX + message + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
+# Print a Warning message (COLOR = YELLOW)
 def printWarning(message):
     print(Fore.YELLOW + MSG_PREFIX + message + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
+# Print an Help message (COLOR = LIGHTGREEN)
 def printHelp(message):
     print(Fore.LIGHTGREEN_EX + MSG_PREFIX + message + MSG_SUFFIX + "\n")
     print(Fore.RESET)

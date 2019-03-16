@@ -1,17 +1,7 @@
 from interface import *
 from  utils import *
 
-
-def constructIntitileProbaArrays(intitules,probas):
-	intitule_proba_mat=[]
-	intitules_proba_chapters=[]
-	for i in range(0, len(intitules)):
-		if("M_" in intitules[i]):
-			intitule_proba_mat.append((intitules[i],probas[i]))
-		else:
-			intitules_proba_chapters.append((intitules[i],probas[i]))
-	return (intitule_proba_mat,intitules_proba_chapters)
-
+# initialize a dictionnary <String, Int>  <==>  <Subject, probability>  with the probabilities at 0
 def constructIntituleMa(array):
 	matArray=[]
 	matMap={}
@@ -22,6 +12,7 @@ def constructIntituleMa(array):
 			array.remove(intitule)
 	return (matArray,matMap)
 
+# initialize a dictionnary <String,<String, Int>>  <==>  <Subject,<chapter, probability>>  with the probabilities at 0
 def constructIntituleChapters(array,matarray):
 	chaptersMap={}
 	for intitule in array:
@@ -34,6 +25,7 @@ def constructIntituleChapters(array,matarray):
 					chaptersMap[mat][intitule] = 0
 	return chaptersMap
 
+# Return a random subject according to their probabilities
 def randSubject(subjectsMap):
 	orderedCollec = collections.OrderedDict(sorted(subjectsMap.items(), key=lambda kv: kv[1]))
 	randnb = get_rand()
@@ -45,16 +37,21 @@ def randSubject(subjectsMap):
 		else:
 			cpt+=1
 	
-
+# Should return a random chapter according subject given and their probabilities
+# To do 
 def randchapters(fonction_repart_chapters):
 	return "choosen chapters"
 
+
+# Should return a random question according to the chapters given and their probabilities
+#To do
 def randQuestion(theme):
 	if(theme.strip().upper() == "SECONDDEGRE"):
 		return "ax^2+bx+c"
 	elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
 		return "ax^2+bx+c"
 
+# run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
 	printInformation("Running in exam mode")
 	#cpt_i=0.0
@@ -70,6 +67,8 @@ def exam_session(subjectsMap,chaptersMap):
 	# print("proba Integral = ",cpt_i/5000)
 	# print("proba Integral = ",cpt_p/5000)
 
+
+# Run the game in trainning session
 def trainning_session(subjectsMap,chaptersMap):
 	printInformation("Running in trainning mode")
 	userInput=""
@@ -80,6 +79,7 @@ def trainning_session(subjectsMap,chaptersMap):
 		userInput = input("your Anwer :> ")
 		# TO DO : Implement the choose of the chapters acccording to the subject		
 
+# The main function of the game
 def run():
 	mode = chooseMode()
 	intitules=["M_Polynome","\t Polynome_Second degre","M_Integrales","\t Integrales_Fonctions puissance","\t Integrales_Fonctions trigonometriques","\t Integrales_Fonctions logarithmiques"]
@@ -91,5 +91,3 @@ def run():
 		exam_session(subjectsMap,chaptersMap)
 	else:
 		trainning_session(subjectsMap,chaptersMap)
-
-run()
