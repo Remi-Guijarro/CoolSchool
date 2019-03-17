@@ -39,8 +39,9 @@ def randSubject(subjectsMap):
 	
 # Should return a random chapter according subject given and their probabilities
 # To do 
-def randchapters(fonction_repart_chapters):
-	return "choosen chapters"
+def randchapters(subject_name,chaptersMap):
+	printInformation(subject_name)
+	printInformation(chaptersMap[subject_name])
 
 
 # Should return a random question according to the chapters given and their probabilities
@@ -57,8 +58,8 @@ def exam_session(subjectsMap,chaptersMap):
 	#cpt_i=0.0
 	#cpt_p=0.0
 	for i in range(0,20):
-		print(randSubject(subjectsMap))
-		# TO DO : Implement the choose of the chapters acccording to the subject		
+		randchapters(randSubject(subjectsMap),chaptersMap)		
+		
 		# ======= This was on a test purpose ========	
 		# if(m == "Integrales"):
 		# 	cpt_i+=1

@@ -51,20 +51,20 @@ def chooseChapterProbabilities(mapchapters,mapSubject):
 
 # Print an Information message (COLOR = CYAN)
 def printInformation(message):
-    print(Fore.CYAN + MSG_PREFIX + message + MSG_SUFFIX + "\n")
+    print(Fore.CYAN + MSG_PREFIX + str(message)  + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
 # Print a Error message (COLOR = RED)
 def printError(message):
-    print(Fore.RED + MSG_PREFIX + message + MSG_SUFFIX + "\n")
+    print(Fore.RED + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
 # Print a Warning message (COLOR = YELLOW)
 def printWarning(message):
-    print(Fore.YELLOW + MSG_PREFIX + message + MSG_SUFFIX + "\n")
+    print(Fore.YELLOW + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
 # Print an Help message (COLOR = LIGHTGREEN)
 def printHelp(message):
-    print(Fore.LIGHTGREEN_EX + MSG_PREFIX + message + MSG_SUFFIX + "\n")
+    print(Fore.LIGHTGREEN_EX + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
