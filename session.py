@@ -65,19 +65,13 @@ def randQuestion(theme):
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
 	printInformation("Running in exam mode")
-	#cpt_i=0.0
-	#cpt_p=0.0
 	for i in range(0,20):
+		printInformation("QUESTION "+ str(i))
 		subject=randSubject(subjectsMap)
 		printInformation(subject)
-		printInformation(randchapters(subject,chaptersMap))		
-		# ======= This was on a test purpose ========	
-		# if(m == "Integrales"):
-		# 	cpt_i+=1
-		# else:
-		# 	cpt_p+=1
-	# print("proba Integral = ",cpt_i/5000)
-	# print("proba Integral = ",cpt_p/5000)
+		printInformation(randchapters(subject,chaptersMap))	
+		userInput = input("your Anwer :> ")
+		clear()
 
 
 # Run the game in trainning session

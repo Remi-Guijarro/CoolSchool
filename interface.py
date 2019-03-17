@@ -1,4 +1,5 @@
 from colorama import init, Fore, Back, Style
+from os import system, name
 
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
@@ -68,3 +69,11 @@ def printWarning(message):
 def printHelp(message):
     print(Fore.LIGHTGREEN_EX + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
+
+def clear(): 
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+    # for mac and linux(here, os.name is 'posix') 
+    else: 
+        _ = system('clear') 
