@@ -47,7 +47,8 @@ def randchapters(subject_name,chaptersMap):
 	func_repart_chap=func_repart(orderedPossibleChapters)
 	for key,value in orderedPossibleChapters.items():
 		if(func_repart_chap[cpt] >= randnb):
-			return key 
+			substr=int(2+len(subject_name))
+			return key[substr:]
 		else:
 			cpt+=1
 
@@ -93,7 +94,7 @@ def trainning_session(subjectsMap,chaptersMap):
 # The main function of the game
 def run():
 	mode = chooseMode()
-	intitules=["M_Polynome","\t Polynome_Second degre","M_Integrales","\t Integrales_Fonctions puissance","\t Integrales_Fonctions trigonometriques","\t Integrales_Fonctions logarithmiques"]
+	intitules=["M_Polynome","\tPolynome_Second degre","M_Integrales","\tIntegrales_Fonctions puissance","\tIntegrales_Fonctions trigonometriques","\tIntegrales_Fonctions logarithmiques"]
 	subjectsArray,subjectsMap=constructIntituleMa(intitules)
 	chaptersMap= constructIntituleChapters(intitules,subjectsArray)
 	subjectsMap = chooseSubjectProbabilities(subjectsMap)
