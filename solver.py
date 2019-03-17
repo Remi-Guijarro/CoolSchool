@@ -114,3 +114,12 @@ def randomPowValues_b(bounds):
 def powResolve_b(bounds,c):
     I = math.log(abs(bounds[1]-c)) - math.log(abs(bounds[0]-c))
     return I
+
+def comparePowAnswer(answer,I):
+    solu = 0
+    if answer == I:
+        solu = True
+    else:
+        solu = False
+    return solu
+    
