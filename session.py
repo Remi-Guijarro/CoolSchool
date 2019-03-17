@@ -40,8 +40,17 @@ def randSubject(subjectsMap):
 # Should return a random chapter according subject given and their probabilities
 # To do 
 def randchapters(subject_name,chaptersMap):
-	printInformation(subject_name)
-	printInformation(chaptersMap[subject_name])
+	possibleChapters=chaptersMap[subject_name]
+	orderedPossibleChapters=collections.OrderedDict(sorted(possibleChapters.items(), key=lambda kv: kv[1]))
+	randnb = get_rand()
+	cpt=0
+	func_repart_chap=func_repart(orderedPossibleChapters)
+	for key,value in orderedPossibleChapters.items():
+		if(func_repart_chap[cpt] >= randnb):
+			return key 
+		else:
+			cpt+=1
+
 
 
 # Should return a random question according to the chapters given and their probabilities
@@ -58,8 +67,9 @@ def exam_session(subjectsMap,chaptersMap):
 	#cpt_i=0.0
 	#cpt_p=0.0
 	for i in range(0,20):
-		randchapters(randSubject(subjectsMap),chaptersMap)		
-		
+		subject=randSubject(subjectsMap)
+		printInformation(subject)
+		printInformation(randchapters(subject,chaptersMap))		
 		# ======= This was on a test purpose ========	
 		# if(m == "Integrales"):
 		# 	cpt_i+=1

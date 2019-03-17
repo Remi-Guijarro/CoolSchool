@@ -3,7 +3,6 @@ import random
 import collections
 
 # Return the repartition function for Subjects
-# Todo test it on chapters or implement a specific function to do so
 def func_repart(orederedCollec):
     repartition=[]
     for key,value in orederedCollec.items():        
