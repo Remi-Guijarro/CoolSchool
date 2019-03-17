@@ -1,5 +1,7 @@
 from interface import *
 from  utils import *
+from solver import *
+
 
 # initialize a dictionnary <String, Int>  <==>  <Subject, probability>  with the probabilities at 0
 def constructIntituleMa(array):
@@ -57,10 +59,10 @@ def randchapters(subject_name,chaptersMap):
 # Should return a random question according to the chapters given and their probabilities
 #To do
 def randQuestion(theme):
+	print(theme)
 	if(theme.strip().upper() == "SECONDDEGRE"):
-		return "ax^2+bx+c"
-	elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
-		return "ax^2+bx+c"
+		return format_polynome(randomPolynomial())
+		
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
@@ -69,7 +71,9 @@ def exam_session(subjectsMap,chaptersMap):
 		printInformation("QUESTION "+ str(i))
 		subject=randSubject(subjectsMap)
 		printInformation(subject)
-		printInformation(randchapters(subject,chaptersMap))	
+		chapter=randchapters(subject,chaptersMap)
+		printInformation(chapter)
+		print(randQuestion(str(chapter).replace(" ","",1).upper()))
 		userInput = input("your Anwer :> ")
 		clear()
 

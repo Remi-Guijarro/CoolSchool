@@ -22,3 +22,22 @@ def get_coef_cumul(orederedCollec, key):
 # Return a random number Between 0 and 1
 def get_rand():
     return random.uniform(0, 1)
+
+def format_polynome(n_uplet):
+    polynome=""
+    for i in range(0,3):        
+        if(n_uplet[i] > 0):
+            polynome+="+"+str(n_uplet[i])+str(get_format_at(i))
+        elif(n_uplet[i] < 0):
+            polynome+=str(n_uplet[i])+str(get_format_at(i))
+        elif (n_uplet[i] == 0):
+            polynome+=str(get_format_at(i))
+    return polynome
+
+def get_format_at(index):
+    if(index == 0):
+        return "x^2"
+    elif(index == 1):
+        return "x"
+    elif(index == 2):
+        return ""

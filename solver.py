@@ -14,7 +14,7 @@ def randomPolynomial():
     a = round(a * 2) / 2
     b = round(b * 2) / 2
     c = round(c * 2) / 2
-    return a, b, c
+    return (a,b,c)
 
 #FONCTION Calculer du discriminant
 def discriminant(param):
@@ -22,18 +22,13 @@ def discriminant(param):
     return delta
 
 #print(randomPolynomial())
-(a, b, c) = randomPolynomial()
+a,b,c = randomPolynomial()
 print( a, b, c)
 print(discriminant(randomPolynomial()))  
 
 #Récupérer du résultat du user
 def compareSolution(param1, param2):
-    solu = 0
-    if param1 != param2:
-        solu = False
-    else:
-        solu = True
-    return solu
+    return  param1 != param2
 
 #Calcul racine pour Delta>0
 def positive_root(para1, para2, para3, delta):
