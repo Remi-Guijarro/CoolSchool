@@ -6,6 +6,7 @@ random.randint.__doc__
 # Générer un Polynôme aléatoire ax²+bx+c
 # ATTENTION Renvoi 3 valeurs a, b, c
 
+
 def randomPolynomial():
     # Nombre alétaoire pour ax²+bx+c compris entre [-10:10]
     a = random.uniform(-10, 10.5)
@@ -15,44 +16,42 @@ def randomPolynomial():
     a = round(a * 2) / 2
     b = round(b * 2) / 2
     c = round(c * 2) / 2
-    return (a,b,c)
+    return (a, b, c)
 
-#sauvegarde du polynome
+
+# sauvegarde du polynome
 polynome = randomPolynomial()
 
-#Traitement compare réponse user 
 
-def polynomSolution(polynome, answer):
-
-    # FONCTION Calculer du discriminant b²-4ac
-
-    def discriminant(randomPolynomial):
-        delta = randomPolynomial[1] * randomPolynomial[1] - \
-            4 * randomPolynomial[0] * randomPolynomial[2]
+def discriminant(randomPolynomial):
+        delta = randomPolynomial[1] * randomPolynomial[1] - 4 * randomPolynomial[0] * randomPolynomial[2]
         return delta
 
     # Calcul racine pour Delta>0
 
-    def positive_root(polynom, delta):
-        x1 = (-polynom[1] + math.sqrt(delta)) / 2 * polynom[0]
-        x2 = (-polynom[1] - math.sqrt(delta)) / 2 * polynom[0]
-        return x1, x2
+def positive_root(polynom, delta):
+    x1 = (-polynom[1] + math.sqrt(delta)) / 2 * polynom[0]
+    x2 = (-polynom[1] - math.sqrt(delta)) / 2 * polynom[0]
+    return x1, x2
 
     # Calcul racine pour Delta=0
-    def null_root(polynom):
-        x = -polynom[1] / 2 * polynom[0]
-        return x
+def null_root(polynom):
+    x = -polynom[1] / 2 * polynom[0]
+    return x,None
 
     # Calcul racine pour Delta<0
 
-    def negative_root():
-        x = None
-        return x
+def negative_root():
+    return None,None
 
-    #sauvegarde de delta
+
+# Traitement compare réponse user 
+
+def polynomSolution(polynome, answer):
+    # FONCTION Calculer du discriminant b²-4ac
+    # sauvegarde de delta
     delta = discriminant(polynome)
-
-    #Calcul des racines selon la valeur de delta
+    # Calcul des racines selon la valeur de delta
     root = 0
     if delta < 0:
         root = negative_root()
@@ -63,7 +62,7 @@ def polynomSolution(polynome, answer):
 
     solu = 0
 
-    #Comparaison solution selon nombre de racine
+    # Comparaison solution selon nombre de racine
     if len(root) == 2:
         if root[0]+root[1] == answer[0]+answer[1]:
             solu = True
