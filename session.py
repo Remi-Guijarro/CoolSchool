@@ -58,10 +58,10 @@ def randchapters(subject_name,chaptersMap):
 
 # Should return a random question according to the chapters given and their probabilities
 #To do
-def randQuestion(theme):
-	print(theme)
+def computeQuestion(theme):
 	if(theme.strip().upper() == "SECONDDEGRE"):
-		return format_polynome(randomPolynomial())
+		(a,b,c)=randomPolynomial()
+		printQuestion("What are the roots of the following polynomial : "+format_polynome((a,b,c))) 
 		
 
 # run the game in exam session
@@ -73,8 +73,7 @@ def exam_session(subjectsMap,chaptersMap):
 		printInformation(subject)
 		chapter=randchapters(subject,chaptersMap)
 		printInformation(chapter)
-		print(randQuestion(str(chapter).replace(" ","",1).upper()))
-		userInput = input("your Anwer :> ")
+		computeQuestion(str(chapter).replace(" ","",1).upper())
 		clear()
 
 

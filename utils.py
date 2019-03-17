@@ -27,9 +27,9 @@ def format_polynome(n_uplet):
     polynome=""
     for i in range(0,3):        
         if(n_uplet[i] > 0):
-            polynome+="+"+str(n_uplet[i])+str(get_format_at(i))
+            polynome+="+"+str(n_uplet[i])+str(get_format_at(i))+" "
         elif(n_uplet[i] < 0):
-            polynome+=str(n_uplet[i])+str(get_format_at(i))
+            polynome+=str(n_uplet[i])+str(get_format_at(i))+" "
         elif (n_uplet[i] == 0):
             polynome+=str(get_format_at(i))
     return polynome

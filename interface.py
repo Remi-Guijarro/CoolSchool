@@ -70,6 +70,10 @@ def printHelp(message):
     print(Fore.LIGHTGREEN_EX + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
+def printQuestion(message):
+    print(Fore.LIGHTYELLOW_EX + str(message) + "\n")
+    print(Fore.RESET)
+
 def clear(): 
     # for windows 
     if name == 'nt': 
