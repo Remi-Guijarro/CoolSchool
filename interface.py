@@ -8,7 +8,7 @@ MODE2="TRAINING"
 
 #  return True if Exam mode have been choosed False otherwise
 def chooseMode():
-    init(convert=True)
+    init()
     while(True):
         print(Style.RESET_ALL)
         mode = input("Which mode do you want to run ? ("+ MODE1 + "|" + MODE2 + ") :> ")
