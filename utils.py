@@ -41,3 +41,10 @@ def get_format_at(index):
         return "x"
     elif(index == 2):
         return ""
+
+def distribute_in_probabilties(values):
+    probabilities = []
+    total = sum(values)
+    for i in range(0, len(values)):
+        probabilities.append(values[i]/total)
+    return probabilities

@@ -1,5 +1,6 @@
 from colorama import init, Fore, Back, Style
 from os import system, name
+import utils
 
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
@@ -34,20 +35,38 @@ def displayDifferentchoice(n_uplet):
 # Return a dictionnary <Subject, probability>
 def chooseSubjectProbabilities(map):
     displayDifferentchoice(map)
+    values=[]
+    probabilities=[]
     for key, value in map.items():
-        proba = input("Choose the propabilities for the subject : " + key + " :> ")
-        map[key] = proba
+        user_input = input("From 0 to 10, how likely do you want to get the subject : " + key + "? :> ")
+        user_input = int(user_input)
+        values.append(user_input)
+    probabilities = utils.distribute_in_probabilties(values)
+    i = 0
+    for key, value in map.items():
+        map[key] = probabilities[i]
+        i=i+1
     return map
 
 # Ask the user to define the probabilities for the chapters
 # Return a dictionnary <Subject,<chapter, probability>>
 def chooseChapterProbabilities(mapchapters,mapSubject):
+    values=[]
+    probabilities=[]
     for key, value in mapchapters.items():
+        print(key)
         for keyy, valuee in value.items():
             if(float(mapSubject[key]) != 0):                
-                print(key)
-                proba = input("Choose the propabilities for the chapter : " + keyy + " :> ")
-                value[keyy] = proba
+                user_input = input("From 0 to 10, how likely do you want to get the chapter : " + keyy + " :> ")
+                user_input = int(user_input)
+                values.append(user_input)
+        probabilities = utils.distribute_in_probabilties(values)
+        i=0
+        for keyy, valuee in value.items():
+            if(float(mapSubject[key]) != 0): 
+                value[keyy] = probabilities[i]
+                i=i+1
+        values.clear()
     return mapchapters
 
 # Print an Information message (COLOR = CYAN)
