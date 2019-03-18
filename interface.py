@@ -74,6 +74,13 @@ def printQuestion(message):
     print(Fore.LIGHTYELLOW_EX + str(message) + "\n")
     print(Fore.RESET)
 
+def waitUntilReady():
+    while(True):
+        if(str(input("(y|n) :>")).upper() == "Y"):
+            clear()
+            break
+    
+
 def clear(): 
     # for windows 
     if name == 'nt': 

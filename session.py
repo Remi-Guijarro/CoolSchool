@@ -39,7 +39,7 @@ def randSubject(subjectsMap):
 		else:
 			cpt+=1
 	
-# Should return a random chapter according subject given and their probabilities
+# Return a random chapter according subject given and their probabilities
 # To do 
 def randchapters(subject_name,chaptersMap):
 	possibleChapters=chaptersMap[subject_name]
@@ -62,7 +62,11 @@ def computeQuestion(theme):
 	if(theme.strip().upper() == "SECONDDEGRE"):
 		(a,b,c)=randomPolynomial()
 		printQuestion("What are the roots of the following polynomial : "+format_polynome((a,b,c))) 
-		
+		printInformation("If there is no answer in R ( for example in the case of negative delta ) write :> none \n -If there is only one roots please write <your_answer>,none")
+		if(polynomSolution((a,b,c), input(":> "))):
+			printInformation("Good !")
+		else:
+			printError("Well you're wrong")
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
@@ -74,8 +78,8 @@ def exam_session(subjectsMap,chaptersMap):
 		chapter=randchapters(subject,chaptersMap)
 		printInformation(chapter)
 		computeQuestion(str(chapter).replace(" ","",1).upper())
-		clear()
-
+		printInformation("Ready for another question ? ")		
+		waitUntilReady()
 
 # Run the game in trainning session
 def trainning_session(subjectsMap,chaptersMap):
