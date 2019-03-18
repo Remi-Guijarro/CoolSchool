@@ -12,9 +12,10 @@ def chooseMode():
     while(True):
         print(Style.RESET_ALL)
         mode = input("Which mode do you want to run ? ("+ MODE1 + "|" + MODE2 + ") :> ")
-        if(mode.upper() == MODE1):
+        mode = mode.upper()
+        if(mode == MODE1):
             return mode
-        elif(mode.upper() == MODE2):
+        elif(mode == MODE2):
             return mode
         else:
             printError("The given mode does not exist")
