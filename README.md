@@ -12,7 +12,7 @@ foo@bar:~$ sudo CoolSchool_linux.sh
 ### Windows
 
 ```
-right click on 
-CoolSchool_win.bat and Run as Administrator 
+click on
+CoolSchool_win.bat 
 ```
 
