@@ -1,2 +1,2 @@
 pip install colorama 
-python CoolSchool.py
+python3 CoolSchool.py
