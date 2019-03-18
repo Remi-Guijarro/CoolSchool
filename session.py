@@ -94,13 +94,15 @@ def trainning_session(subjectsMap,chaptersMap):
 
 # The main function of the game
 def run():
-	mode = chooseMode()
+	mode = chooseMode()	
 	intitules=["M_Polynome","\tPolynome_Second degre","M_Integrales","\tIntegrales_Fonctions puissance","\tIntegrales_Fonctions trigonometriques","\tIntegrales_Fonctions logarithmiques"]
 	subjectsArray,subjectsMap=constructIntituleMa(intitules)
 	chaptersMap= constructIntituleChapters(intitules,subjectsArray)
 	subjectsMap = chooseSubjectProbabilities(subjectsMap)
 	chaptersMap = chooseChapterProbabilities(chaptersMap,subjectsMap)
-	if(mode):
+	if(mode == MODE1):
 		exam_session(subjectsMap,chaptersMap)
-	else:
+	elif(mode == MODE2):
 		trainning_session(subjectsMap,chaptersMap)
+	else:
+		printError("Mode is not implemented.")

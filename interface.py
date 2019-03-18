@@ -13,12 +13,11 @@ def chooseMode():
         print(Style.RESET_ALL)
         mode = input("Which mode do you want to run ? ("+ MODE1 + "|" + MODE2 + ") :> ")
         if(mode.upper() == MODE1):
-            return True
+            return mode
         elif(mode.upper() == MODE2):
-            return False
+            return mode
         else:
-            printError("The given mode does not exist" )
-    return mode
+            printError("The given mode does not exist")
 
 # Print the possible possible choice about (subjects) and 
 # Todo : for the Chapters
