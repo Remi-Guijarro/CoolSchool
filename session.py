@@ -61,36 +61,55 @@ def randchapters(subject_name,chaptersMap):
 def computeQuestion(theme):
 	if(theme.strip().upper() == "SECONDDEGRE"):
 		(a,b,c)=randomPolynomial()
+		printInformation(" \n\n If there is no answers in R ( for example in the case of negative delta ) write : \n x1 :> none \n x2 :> none \n\n -If there is only one roots please write :> <your_answer>,none \n\n please note that answers are needed with a 2 digits precision")
 		printQuestion("What are the roots of the following polynomial : "+format_polynome((a,b,c))) 
-		printInformation("If there is no answer in R ( for example in the case of negative delta ) write :> none \n -If there is only one roots please write <your_answer>,none")
-		if(polynomSolution((a,b,c), input(":> "))):
+		x1=input("x1 :> ")
+		x2=input("x2 :> ")
+		if(polynomSolution((a,b,c),(x1,x2))):
 			printInformation("Good !")
-		else:
-			printError("Well you're wrong")
+			return True
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
 	printInformation("Running in exam mode")
-	for i in range(0,20):
+	nbPoint=0
+	for i in range(1,19):
 		printInformation("QUESTION "+ str(i))
 		subject=randSubject(subjectsMap)
 		printInformation(subject)
 		chapter=randchapters(subject,chaptersMap)
 		printInformation(chapter)
-		computeQuestion(str(chapter).replace(" ","",1).upper())
+		if(computeQuestion(str(chapter).replace(" ","",1).upper())):
+			nbPoint+=1
 		printInformation("Ready for another question ? ")		
 		waitUntilReady()
+	if(nbPoint < 10 and nbPoint >= 8 ):
+		printWarning("You've pointed "+ str(nbPoint) + " /20 , Try harder next time ! ")
+	elif(nbPoint > 10 and nbPoint < 15):
+		printWarning("You've pointed "+ str(nbPoint) + " /20 , that's nice ! ")
+	elif(nbPoint < 8):
+		printError("You've pointed "+ str(nbPoint) + " /20 , :(  Try harder next time ! ")
+	elif(nbPoint > 15):
+		printError("You've pointed "+ str(nbPoint) + " /20 , you're a monster ! ")
 
 # Run the game in trainning session
 def trainning_session(subjectsMap,chaptersMap):
 	printInformation("Running in trainning mode")
-	userInput=""
-	while(True):
-		if(userInput == "QUIT"):
-			break		
-		print(randSubject(subjectsMap))
-		userInput = input("your Anwer :> ")
-		# TO DO : Implement the choose of the chapters acccording to the subject		
+	nbPoint=0
+	cpt=1
+	while(True):	
+		printInformation("QUESTION "+ str(cpt))
+		subject=randSubject(subjectsMap)
+		printInformation(subject)
+		chapter=randchapters(subject,chaptersMap)
+		printInformation(chapter)
+		if(computeQuestion(str(chapter).replace(" ","",1).upper())):
+			nbPoint+=1
+		if(not wanaQuit()):	
+			printInformation("TOTAL POINTS SCORED : " + str(nbPoint))
+			break	
+		cpt+=cpt
+
 
 # The main function of the game
 def run():

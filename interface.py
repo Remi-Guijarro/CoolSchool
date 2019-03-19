@@ -99,7 +99,11 @@ def waitUntilReady():
             clear()
             break
     
-
+def wanaQuit():
+    if(str(input(" wanna Quit ? (y|n) :>")).upper() == "Y"):
+        return True
+    else:
+        return False
 def clear(): 
     # for windows 
     if name == 'nt': 

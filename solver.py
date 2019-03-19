@@ -5,6 +5,7 @@ import math
 random.randint.__doc__
 from random import choice
 from random import randint
+from interface import printError
 
 
 # Générer un Polynôme aléatoire ax²+bx+c
@@ -28,20 +29,21 @@ polynome = randomPolynomial()
 
 
 def discriminant(randomPolynomial):
-        delta = randomPolynomial[1] * randomPolynomial[1] - 4 * randomPolynomial[0] * randomPolynomial[2]
+        delta = (randomPolynomial[1] * randomPolynomial[1]) - 4 * (randomPolynomial[0] * randomPolynomial[2])
+        print(delta)
         return delta
 
     # Calcul racine pour Delta>0
 
 def positive_root(polynom, delta):
-    x1 = (-polynom[1] + math.sqrt(delta)) / 2 * polynom[0]
-    x2 = (-polynom[1] - math.sqrt(delta)) / 2 * polynom[0]
-    return x1, x2
+    x1 = ((-polynom[1]) + math.sqrt(delta)) / (2 * polynom[0])
+    x2 = (-polynom[1] - math.sqrt(delta)) / (2 * polynom[0])
+    return float("{0:.2f}".format(round(float(x1),2))),float("{0:.2f}".format(round(float(x2),2)))
 
     # Calcul racine pour Delta=0
 def null_root(polynom):
     x = -polynom[1] / 2 * polynom[0]
-    return x,None
+    return float("{0:.2f}".format(round(float(x),2))),None
 
     # Calcul racine pour Delta<0
 
@@ -64,20 +66,33 @@ def polynomSolution(polynome, answer):
     else:
         root = positive_root(polynome, delta)
     solu = 0
-    print(root)
     # Comparaison solution selon nombre de racine
     if len(root) == 2:
-        if (str(root[0]) == str(answer[0])) and ( str(root[1]) == str(answer[1])):
-            solu = True
-        else:
-            solu = False
+        if str(root[0]).upper() == "NONE"  and str(root[1]).upper() == "NONE":
+            if (str(root[0]).upper() == str(answer[0]).upper() ) and (str(root[1]).upper() == str(answer[1]).upper() ) or (str(root[0]).upper() == str(answer[1]).upper() ) and ( str(root[1]).upper() == str(answer[0]).upper() ):
+                solu = True
+            else:
+                printError("The solution was :> "+ str(root[0]) + "  " +str(root[1])) 
+                solu = False
+        else:     
+            if (str("{0:.2f}".format(round(float(root[0]),2))) == str(answer[0])) and ( str("{0:.2f}".format(round(float(root[1]),2))) == str(answer[1])) or  (str("{0:.2f}".format(round(float(root[0]),2))) == str(answer[1])) and ( str("{0:.2f}".format(round(float(root[1]),2))) == str(answer[0])):
+                solu = True
+            else:
+                printError(str("{0:.2f}".format(round(float(root[0]),2))) + "  " +str("{0:.2f}".format(round(float(root[1]),2)))) 
+                solu = False
     elif len(root) <= 1:
-        if str(root) == str(answer):
-            print(str(root))
-            solu = True
+        if str(root).upper() == "NONE":    
+            if str(root) == str(answer):
+                solu = True
+            else:
+                printError(str("{0:.2f}".format(round(float(root),2)))) 
+                solu = False
         else:
-            solu = False
-    
+            if str("{0:.2f}".format(round(float(root),2))) == str(answer):
+                solu = True
+            else:
+                printError(str("{0:.2f}".format(round(float(root),2)))) 
+                solu = False
     return solu
 
 
