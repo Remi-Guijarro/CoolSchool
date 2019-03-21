@@ -33,7 +33,7 @@ def format_polynome(n_uplet):
         elif(n_uplet[i] < 0):
             polynome+=str(n_uplet[i])+str(get_format_at(i))+" "
         elif (n_uplet[i] == 0):
-            polynome+=str(get_format_at(i))
+            continue
     return polynome
 
 def get_format_at(index):
