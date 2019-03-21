@@ -98,8 +98,11 @@ def randomPowValues_a():
     return c, d, alpha
 
 def powResolve_a(bounds,c_d_alpha):
+    a,b=bounds
+    c,d,al=c_d_alpha
+    print("a",a,"\n b ",b,"\n c",c,"\n d ",d,"\n alpha",al)
     I = ( 1 / c_d_alpha[0] * (c_d_alpha[2] + 1)) * ((bounds[1]*c_d_alpha[0] - c_d_alpha[1])**(c_d_alpha[2]+1) - (bounds[0]*c_d_alpha[0]-c_d_alpha[1])**(c_d_alpha[2]+1))
-    return I
+    return float("{0:.2f}".format(round(float(I),2)))
 
 #Integral Puissance question 2.1.b -> c, d, alpha random value in A (with exceptions)
 def randomPowValues_b(bounds):
