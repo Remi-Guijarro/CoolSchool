@@ -68,6 +68,16 @@ def computeQuestion(theme):
 		if(polynomSolution((a,b,c),(x1,x2))):
 			printInformation("Good !")
 			return True
+	elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
+    	x=get_rand()
+		if(x < 0.5):
+    		(a,b)=randomIntegralBounds()
+    		(c,d,alpha)=randomPowValues_a()
+    	else:
+    		(a,b)=randomIntegralBounds()
+    		c=randomPowValues_b()
+    			
+    			
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
