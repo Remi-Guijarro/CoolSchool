@@ -130,3 +130,24 @@ def randomPowValues_b(bounds):
 def powResolve_b(bounds,c):
     I = math.log(abs(bounds[1]-c)) - math.log(abs(bounds[0]-c))
     return I
+
+def randomTrigo():
+    c = choice([i for i in range(-10,10) if i not in [0]])
+    return c
+
+print(randomTrigo())
+
+def trigoCosResolve(bounds,c):
+    I = 0
+    I = (math.sin(bounds[1]*c) - math.sin(bounds[0]*c)) / c
+    return I
+
+def trigoSinResolve(bounds,c):
+    I = 0
+    I = - (math.cos(bounds[1]*c) - math.cos(bounds[0]*c)) / c
+    return I
+
+def trigoTanResolve(bounds,c):
+    I = 0
+    I = (math.log(abs(math.cos(bounds[1],c))) - (math.log(abs(math.cos(bounds[0],c))) / c
+    return I
