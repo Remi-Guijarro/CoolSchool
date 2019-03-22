@@ -69,13 +69,22 @@ def computeQuestion(theme):
             printInformation("Good !")
             return True
     elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
-        x=get_rand()
-        if(x < 0.5):
-            (a,b)=randomIntegralBounds()
-            (c,d,alpha)=randomPowValues_a()
-        else:
-            (a,b)=randomIntegralBounds()
-            c=randomPowValues_b()
+        # x=get_rand()
+        # if(x < 0.5):
+        (a,b)=randomIntegralBounds()
+        (c,d,alpha)=randomPowValues_a()
+        printInformation("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision")
+        printQuestion("("+str(c)+"x -" + str(d) + ")^"+str(alpha) + "\t Betwwen bounds " + str(a) + " To " + str(b))
+        x=input("I :> ")
+        result =powResolve_a((a,b),(c,d,alpha)) 
+        print(result)
+        if(result == float(x)):
+            printInformation("Good !")
+            return True
+
+        # else:
+        #     (a,b)=randomIntegralBounds()
+        #     c=randomPowValues_b()
     
                 
                 
