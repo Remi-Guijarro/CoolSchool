@@ -136,8 +136,28 @@ def trigoSinResolve(bounds,c):
 
 def trigoTanResolve(bounds,c):
     I = 0
-    I = (math.log(abs(math.cos(bounds[1],c)))) - (math.log(abs(math.cos(bounds[0],c))) / c)
+    A = bounds[0]*c
+    B = bounds[1]*c
+    I = (math.log(abs(math.cos(B))) - (math.log(abs(math.cos(A))))) / c 
     return I
+#TEST
+# gg = math.log(abs(math.cos(-2)))
+# ggg = math.cos(2)
+
+# print(gg)
+# print(ggg)
+
+# (billout)=randomIntegralBounds()
+# print(billout)
+# t = randomTrigo()
+# print(t)
+# f = trigoSinResolve(billout,t)
+# print("sinus =", round(f,2))
+# g = trigoCosResolve(billout,t)
+# print("Cosinus = ",round(g,2))
+# h = trigoTanResolve(billout,t)
+# print("Tangente = ", round(h,2))
+# print(math.tan(t))
 
 def computeLimitFunction(bounds,function):
     animation = "|/-\\"
