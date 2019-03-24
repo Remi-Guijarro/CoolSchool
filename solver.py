@@ -124,24 +124,28 @@ def randomTrigo():
     c = choice([i for i in range(-10,10) if i not in [0]])
     return c
 
-# print(randomTrigo())
-
 def trigoCosResolve(bounds,c):
     I = 0
+    if(computeLimitFunction(bounds,str("cos("+str(c)+"*x)"))):
+        return "none"
     I = (math.sin(bounds[1]*c) - math.sin(bounds[0]*c)) / c
-    return I
+    return "{0:.2f}".format(float(I),2)
 
 def trigoSinResolve(bounds,c):
     I = 0
+    if(computeLimitFunction(bounds,str("sin("+str(c)+"*x)"))):
+        return "none"
     I = - (math.cos(bounds[1]*c) - math.cos(bounds[0]*c)) / c
-    return I
+    return "{0:.2f}".format(float(I),2)
 
 def trigoTanResolve(bounds,c):
     I = 0
     A = bounds[0]*c
     B = bounds[1]*c
+    if(computeLimitFunction(bounds,str("tan("+str(c)+"*x)"))):
+        return "none"
     I = (math.log(abs(math.cos(B))) - (math.log(abs(math.cos(A))))) / c 
-    return I
+    return "{0:.2f}".format(float(I),2)
 #TEST
 # gg = math.log(abs(math.cos(-2)))
 # ggg = math.cos(2)

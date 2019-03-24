@@ -54,7 +54,23 @@ def randchapters(subject_name,chaptersMap):
         else:
             cpt+=1
 
+def compareSolutions(result,x):
+    if(result == str(x).strip()):
+        printInformation("Good !")
+        return True
+    else:
+        printError("result was " + str(result))
+        return False
 
+def printScore(nbPoint,i):
+    if(float(nbPoint/i) < 0.5 and float(nbPoint/i) > 0.4):
+        printWarning("You've pointed "+ str(nbPoint) + " /"+str(i)+" :| , Try harder next time ! ")
+    elif(float(nbPoint/i) > 0.5 and float(nbPoint/i) < 0.80 ):
+        printWarning("You've pointed "+ str(nbPoint) + " /"+str(i)+" , that's nice ! ")
+    elif(float(nbPoint/i) < 0.4):
+        printError("You've pointed "+ str(nbPoint) + " /"+str(i)+" , :(  Try harder next time ! ")
+    elif(float(nbPoint/i) > 0.80):
+        printError("You've pointed "+ str(nbPoint) + " /"+str(i)+" , you're a monster ! ")
 
 # Should return a random question according to the chapters given and their probabilities
 #To do
@@ -77,11 +93,7 @@ def computeQuestion(theme):
             printQuestion(str("("+str(c)+"x -" + str(d) + ")^"+str(alpha)).replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
             x=input("I :> ")
             result =powResolve_a((a,b),(c,d,alpha)) 
-            if(result == str(x).strip()):
-                printInformation("Good !")
-                return True
-            else:
-                printError("result was " + str(result))
+            return compareSolutions(result,x)
         else:
             (a,b)=randomIntegralBounds()
             c=randomPowValues_b((a,b))
@@ -89,12 +101,43 @@ def computeQuestion(theme):
             printQuestion(str("1/(x-"+str(c)+")").replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
             x=input("I :> ")
             result =powResolve_b((a,b),c) 
-            if(result == str(x).strip()):
-                printInformation("Good !")
-                return True
-            else:
-                printError("result was " + str(result))
-    
+            return compareSolutions(result,x)
+    elif(theme.strip().upper() == "FONCTIONSTRIGONOMETRIQUES"):
+        x=get_rand()
+        if(x < 0.33):
+            (a,b)=randomIntegralBounds()
+            c=randomTrigo()
+            printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
+            printQuestion(str("cos("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            x=input("I :> ")
+            result =trigoCosResolve((a,b),c) 
+            return compareSolutions(result,x)
+        elif(x < 0.66):
+            (a,b)=randomIntegralBounds()
+            c=randomTrigo()
+            printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge \n\n")
+            printQuestion(str("sin("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            x=input("I :> ")
+            result =trigoSinResolve((a,b),c) 
+            return compareSolutions(result,x)
+        else:
+            (a,b)=randomIntegralBounds()
+            c=randomTrigo()
+            printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge \n\n")
+            printQuestion(str("tan("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            x=input("I :> ")
+            result=trigoTanResolve((a,b),c) 
+            return compareSolutions(result,x)
+    elif(theme.strip().upper() == "FONCTIONSLOGARITHMIQUES"):
+        print("NOT YET IMPLEMENTED")
+        # WAITING FOR SOLVE FUNCTION TO BE IMPLEMENTED
+        # (a,b)=randomIntegralBounds()
+        # c=randomTrigo()
+        # printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
+        # printQuestion(str("cos("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+        # x=input("I :> ")
+        # result =trigoCosResolve((a,b),c) 
+        # return compareSolutions(result,x)      
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
@@ -112,14 +155,7 @@ def exam_session(subjectsMap,chaptersMap):
         printInformation("Ready for another question ? ")        
         waitUntilReady()
         clear()
-    if(nbPoint < 10 and nbPoint >= 8 ):
-        printWarning("You've pointed "+ str(nbPoint) + " /20 , Try harder next time ! ")
-    elif(nbPoint > 10 and nbPoint < 15):
-        printWarning("You've pointed "+ str(nbPoint) + " /20 , that's nice ! ")
-    elif(nbPoint < 8):
-        printError("You've pointed "+ str(nbPoint) + " /20 , :(  Try harder next time ! ")
-    elif(nbPoint > 15):
-        printError("You've pointed "+ str(nbPoint) + " /20 , you're a monster ! ")
+    printScore(nbPoint,20)
 
 # Run the game in trainning session
 def trainning_session(subjectsMap,chaptersMap):
@@ -134,11 +170,11 @@ def trainning_session(subjectsMap,chaptersMap):
         printInformation(chapter)
         if(computeQuestion(str(chapter).replace(" ","",1).upper())):
             nbPoint+=1
-        if(not wanaQuit()):    
-            printInformation("TOTAL POINTS SCORED : " + str(nbPoint))
+        if(wanaQuit()): 
+            print(cpt)   
+            printScore(nbPoint,cpt)
             break    
-        cpt+=cpt
-
+        cpt+=1
 
 # The main function of the game
 def run():
