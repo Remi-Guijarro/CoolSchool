@@ -92,7 +92,7 @@ def printHelp(message):
     print(Fore.RESET)
 
 def printQuestion(message):
-    print(Fore.LIGHTYELLOW_EX + str(message) + "\n")
+    print("Q : " + Fore.LIGHTYELLOW_EX + str(message) + "\n")
     print(Fore.RESET)
 
 def waitUntilReady():

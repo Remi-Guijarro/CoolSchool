@@ -69,26 +69,32 @@ def computeQuestion(theme):
             printInformation("Good !")
             return True
     elif(theme.strip().upper() == "FONCTIONSPUISSANCE"):
-        # x=get_rand()
-        # if(x < 0.5):
-        (a,b)=randomIntegralBounds()
-        (c,d,alpha)=randomPowValues_a()
-        printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
-        printQuestion("("+str(c)+"x -" + str(d) + ")^"+str(alpha) + "\t Betwwen bounds " + str(a) + " To " + str(b))
-        x=input("I :> ")
-        result =powResolve_a((a,b),(c,d,alpha)) 
-        if(result == str(x).strip()):
-            printInformation("Good !")
-            return True
+        x=get_rand()
+        if(x < 0.5):
+            (a,b)=randomIntegralBounds()
+            (c,d,alpha)=randomPowValues_a()
+            printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
+            printQuestion(str("("+str(c)+"x -" + str(d) + ")^"+str(alpha)).replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            x=input("I :> ")
+            result =powResolve_a((a,b),(c,d,alpha)) 
+            if(result == str(x).strip()):
+                printInformation("Good !")
+                return True
+            else:
+                printError("result was " + str(result))
         else:
-            printError("result was " + str(result))
-
-        # else:
-        #     (a,b)=randomIntegralBounds()
-        #     c=randomPowValues_b()
+            (a,b)=randomIntegralBounds()
+            c=randomPowValues_b((a,b))
+            printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge \n\n")
+            printQuestion(str("1/(x-"+str(c)+")").replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            x=input("I :> ")
+            result =powResolve_b((a,b),c) 
+            if(result == str(x).strip()):
+                printInformation("Good !")
+                return True
+            else:
+                printError("result was " + str(result))
     
-                
-                
 
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):

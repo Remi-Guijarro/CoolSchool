@@ -115,8 +115,10 @@ def randomPowValues_b(bounds):
     return c
 
 def powResolve_b(bounds,c):
+    if(computeLimitFunction(bounds,str("1/(x"+" -"+str(c)+")"))):
+        return "none"
     I = math.log(abs(bounds[1]-c)) - math.log(abs(bounds[0]-c))
-    return I
+    return "{0:.2f}".format(float(I),2)
 
 def randomTrigo():
     c = choice([i for i in range(-10,10) if i not in [0]])
