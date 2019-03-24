@@ -1,6 +1,8 @@
 from colorama import init, Fore, Back, Style
 from os import system, name
 import utils
+import time
+
 
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
@@ -111,3 +113,6 @@ def clear():
     # for mac and linux(here, os.name is 'posix') 
     else: 
         _ = system('clear') 
+
+def wait(secs):
+    time.sleep(secs)

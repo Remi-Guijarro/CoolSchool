@@ -73,14 +73,15 @@ def computeQuestion(theme):
         # if(x < 0.5):
         (a,b)=randomIntegralBounds()
         (c,d,alpha)=randomPowValues_a()
-        printInformation("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision")
+        printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
         printQuestion("("+str(c)+"x -" + str(d) + ")^"+str(alpha) + "\t Betwwen bounds " + str(a) + " To " + str(b))
         x=input("I :> ")
         result =powResolve_a((a,b),(c,d,alpha)) 
-        print(result)
-        if(result == float(x)):
+        if(result == str(x).strip()):
             printInformation("Good !")
             return True
+        else:
+            printError("result was " + str(result))
 
         # else:
         #     (a,b)=randomIntegralBounds()
@@ -95,6 +96,7 @@ def exam_session(subjectsMap,chaptersMap):
     nbPoint=0
     for i in range(1,19):
         printInformation("QUESTION "+ str(i))
+        wait(1)
         subject=randSubject(subjectsMap)
         printInformation(subject)
         chapter=randchapters(subject,chaptersMap)
@@ -103,6 +105,7 @@ def exam_session(subjectsMap,chaptersMap):
             nbPoint+=1
         printInformation("Ready for another question ? ")        
         waitUntilReady()
+        clear()
     if(nbPoint < 10 and nbPoint >= 8 ):
         printWarning("You've pointed "+ str(nbPoint) + " /20 , Try harder next time ! ")
     elif(nbPoint > 10 and nbPoint < 15):

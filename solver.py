@@ -6,7 +6,11 @@ random.randint.__doc__
 from random import choice
 from random import randint
 from interface import printError
+from sympy import limit,Symbol
+from numpy import arange
 
+LIMIT_MAX = 3000000000000
+LIMIT_MIN = -3000000000000
 
 # Générer un Polynôme aléatoire ax²+bx+c
 # ATTENTION Renvoi 3 valeurs a, b, c
@@ -26,7 +30,7 @@ def randomPolynomial():
 
 def discriminant(randomPolynomial):
         delta = (randomPolynomial[1] * randomPolynomial[1]) - 4 * (randomPolynomial[0] * randomPolynomial[2])
-        print(delta)
+        # print(delta)
         return delta
 
 # Calcul racine pour Delta>0
@@ -59,7 +63,7 @@ def polynomSolution(polynome, answer):
         root = positive_root(polynome, delta)
     solu = 0
     # Comparaison solution selon nombre de racine
-    print(len(root))
+    # print(len(root))
     if str(root[0]).upper() == "NONE"  and str(root[1]).upper() == "NONE":
         if (str(root[0]).upper() == str(answer[0]).upper() ) and (str(root[1]).upper() == str(answer[1]).upper() ) or (str(root[0]).upper() == str(answer[1]).upper() ) and ( str(root[1]).upper() == str(answer[0]).upper() ):
             solu = True
@@ -100,9 +104,10 @@ def randomPowValues_a():
 def powResolve_a(bounds,c_d_alpha):
     a,b=bounds
     c,d,al=c_d_alpha
-    print("a",a,"\n b ",b,"\n c",c,"\n d ",d,"\n alpha",al)
-    I = 1/(c*(al+1))*( pow((b*c-d), al+1) - pow((a*c-d), al+1)) 
-    return float("{0:.2f}".format(float(I),2))
+    if(computeLimitFunction(bounds,str("("+str(c)+"*x"+ "-"+str(d)+")"+"**"+str(al)))):
+        return "none"
+    I = (1/(c*(al+1))*( pow((b*c-d), al+1) - pow((a*c-d), al+1)))
+    return "{0:.2f}".format(float(I),2)
 
 #Integral Puissance question 2.1.b -> c, d, alpha random value in A (with exceptions)
 def randomPowValues_b(bounds):
@@ -117,7 +122,7 @@ def randomTrigo():
     c = choice([i for i in range(-10,10) if i not in [0]])
     return c
 
-print(randomTrigo())
+# print(randomTrigo())
 
 def trigoCosResolve(bounds,c):
     I = 0
@@ -131,5 +136,14 @@ def trigoSinResolve(bounds,c):
 
 def trigoTanResolve(bounds,c):
     I = 0
-    I = (math.log(abs(math.cos(bounds[1],c))) - (math.log(abs(math.cos(bounds[0],c))) / c
+    I = (math.log(abs(math.cos(bounds[1],c)))) - (math.log(abs(math.cos(bounds[0],c))) / c)
     return I
+
+def computeLimitFunction(bounds,function):
+    animation = "|/-\\"
+    idx = 0
+    for i in arange(int(bounds[0]),int(bounds[1]),0.1):        
+        print(animation[idx % len(animation)], end="\r")
+        idx += 1
+        if (str(limit(function,Symbol("x"),i)) == "oo" or float(limit(function,Symbol("x"),i)) > LIMIT_MAX or float(limit(function,Symbol("x"),i)) < LIMIT_MIN ):
+            return True
