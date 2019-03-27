@@ -1,11 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
-import math
 random.randint.__doc__
 from random import choice
 from random import randint
 from interface import printError
+from scipy.integrate import quad
 from sympy import limit,Symbol
 from numpy import arange
 
@@ -173,3 +173,29 @@ def computeLimitFunction(bounds,function):
         idx += 1
         if (str(limit(function,Symbol("x"),i)) == "oo" or float(limit(function,Symbol("x"),i)) > LIMIT_MAX or float(limit(function,Symbol("x"),i)) < LIMIT_MIN ):
             return True
+
+# Log function | random value for c (contraintes spéciale)
+def randomLog():
+    c = random.uniform(0.5, 10.5)
+    c = round(c * 2) / 2
+    return c
+
+def logResolve(bounds,c):
+    I = 0
+    J = 0
+    I = (bounds[1]*(math.log10(bounds[1]*c))) - (bounds[0]*(math.log10(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
+    J = (bounds[1]*(math.log(bounds[1]*c))) - (bounds[0]*(math.log(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
+    return I, J
+
+def logResolve2(bounds,c):
+    I = quad(math.log(c),bounds[0],bounds[1])
+    return I
+
+test = randomLog()
+print(test)
+
+bornes = randomIntegralBounds()
+print(bornes)
+
+print(logResolve(bornes,test))
+
