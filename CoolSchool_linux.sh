@@ -4,6 +4,9 @@ PROGRAMS=""
 COLORAMA=false
 SYMPY=false
 NUMPY=false
+SCIPY=false
+
+echo "Scanning system for required libraries..."
 
 for PIP_LIST_OUTPUT in `pip3 list --format=columns`; do
     if [ "$PIP_LIST_OUTPUT" == "colorama" ]; then
@@ -12,6 +15,8 @@ for PIP_LIST_OUTPUT in `pip3 list --format=columns`; do
 		SYMPY=true
 	elif [ "$PIP_LIST_OUTPUT" == "numpy" ]; then
 		NUMPY=true
+	elif [ "$PIP_LIST_OUTPUT" == "scipy" ]; then
+		SCIPY=true
 	fi
 done
 
@@ -24,9 +29,16 @@ fi
 if [ $NUMPY == false ]; then
 	PROGRAMS+="numpy "
 fi
+if [ $SCIPY == false ]; then
+	PROGRAMS+="scipy "
+fi
 
 if [ ! -z "$PROGRAMS" ]; then
 	pip3 install $PROGRAMS
+else
+	echo "All libraries already installed."
+	echo "Press a key to continue..."
+	read
 fi
 
 clear
