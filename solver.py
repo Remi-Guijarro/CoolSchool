@@ -1,6 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
+import math
 random.randint.__doc__
 from random import choice
 from random import randint
@@ -191,11 +192,11 @@ def logResolve2(bounds,c):
     I = quad(math.log(c),bounds[0],bounds[1])
     return I
 
-test = randomLog()
-print(test)
+# test = randomLog()
+# print(test)
 
-bornes = randomIntegralBounds()
-print(bornes)
+# bornes = randomIntegralBounds()
+# print(bornes)
 
-print(logResolve(bornes,test))
+# print(logResolve(bornes,test))
 
