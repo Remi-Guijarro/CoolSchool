@@ -1,6 +1,8 @@
 from interface import *
 from  utils import *
 from solver import *
+import parser
+from math import * 
 
 
 # initialize a dictionnary <String, Int>  <==>  <Subject, probability>  with the probabilities at 0
@@ -129,13 +131,15 @@ def computeQuestion(theme):
             result=trigoTanResolve((a,b),c) 
             return compareSolutions(result,x)
     elif(theme.strip().upper() == "FONCTIONSLOGARITHMIQUES"):
-        (a,b)=randomIntegralBounds()
+        (a,b)=randomIntegralBounds(0,10)
         c=randomLog()
         printWarning("\n\n Solve this integral equation , I : <Your_answer> \n\n please note that answers are needed with a 2 digits precision \n\n  For exemple if the answer is \n\t-0.000121516 ==> you should print -0.00 \n\n\t0.00121651 ==> you should print 0.00 \n\n\t 31 => you should print 31.00 \n\n\t If the Integral does not converge in the given bounds print => none \n\n note that this programm consider that if the limit of the function at one point within the given bounds exceed 300000000000 \n then the Integral does not converge ")
         printQuestion(str("ln("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
         x=input("I :> ")
-        result =trigoCosResolve((a,b),c) 
-        return compareSolutions(result,x)      
+        formula="\"{0:.2f}\".format(float("+str(x)+"),2)"
+        code=parser.expr(formula).compile()
+        result =logResolve((a,b),c) 
+        return compareSolutions(result,eval(code))      
 # run the game in exam session
 def exam_session(subjectsMap,chaptersMap):
     printInformation("Running in exam mode")

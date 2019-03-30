@@ -81,13 +81,12 @@ def polynomSolution(polynome, answer):
 
 
 #Integral a & b random values in range[-10,10] = A
-def randomIntegralBounds():
+def randomIntegralBounds(min=-10,max=10):
     a = 0
     b = 0
     while a == b:    
-        a = randint(-10,10)
-        b = randint(-10,10)
-
+        a = randint(min,max)
+        b = randint(min,max)
     t = 0
     if a > b:
         t = a
@@ -181,16 +180,16 @@ def randomLog():
     c = round(c * 2) / 2
     return c
 
-def logResolve(bounds,c):
-    I = 0
-    J = 0
-    I = (bounds[1]*(math.log10(bounds[1]*c))) - (bounds[0]*(math.log10(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
-    J = (bounds[1]*(math.log(bounds[1]*c))) - (bounds[0]*(math.log(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
-    return I, J
+# def logResolve(bounds,c):
+#     I = (bounds[1]*(math.log1p(bounds[1]*c))) - (bounds[0]*(math.log1p(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
+#     return I
 
-def logResolve2(bounds,c):
-    I = quad(math.log(c),bounds[0],bounds[1])
-    return I
+
+def logResolve(bounds,c):
+    def logReturnFunction(x):
+        return math.log(c*x)
+    I,J = quad(logReturnFunction,bounds[0],bounds[1])
+    return "{0:.2f}".format(float(I-J),2)  
 
 # test = randomLog()
 # print(test)
