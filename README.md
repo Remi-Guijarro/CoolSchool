@@ -16,3 +16,9 @@ click on
 CoolSchool_win.bat 
 ```
 
+### Create an executable
+
+```
+pyinstaller CoolSchool.py
+```
+

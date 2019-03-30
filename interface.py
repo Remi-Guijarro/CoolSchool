@@ -2,31 +2,41 @@ from colorama import init, Fore, Back, Style
 from os import system, name
 import utils
 import time
+import parser
+from math import * 
 
-
+PROBA_CHOICE_MSG="\n Veuillez entrer les probabilites de chaque sujets et chapitres : \n \t -Notez que si vous assigner  0 sur un sujet ou un  chapitre, aucune question en vous seront poser sur ces sujets ou themes \n Voici les choix possibles \n"
+THEME_CHOICE_MSG="De 0 a 10, notez votre preference sur ce theme : "
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
 MODE1="EXAM"
-MODE2="TRAINING"
+MODE2="ENTRAINNEMENT"
+HELP="AIDE"
+MODE_NOT_EXIST_ERROR="Ce mode m'existe pas ou pas encore"
+HELP_MODE_MESSAGE="\n Examen : Une serie de 10 questions \n Entrainnement : un mode sans fin ou vous decidez de vous arreter quand vous le voulez \n"
 
 #  return True if Exam mode have been choosed False otherwise
 def chooseMode():
     init()
     while(True):
         print(Style.RESET_ALL)
-        mode = input("Which mode do you want to run ? ("+ MODE1 + "|" + MODE2 + ") :> ")
-        mode = mode.upper()
+        mode = input("Quel type de session voulez vous lancer ? ("+ MODE1 + "|" + MODE2 + "|" + HELP + ") :> ")
+        mode = mode.upper().strip(' ')
         if(mode == MODE1):
             return mode
         elif(mode == MODE2):
             return mode
+        elif(mode == HELP):
+            clear()
+            printHelp(HELP_MODE_MESSAGE)
+            chooseMode()
         else:
-            printError("The given mode does not exist")
+            printError(MODE_NOT_EXIST_ERROR)
 
 # Print the possible possible choice about (subjects) and 
 # Todo : for the Chapters
 def displayDifferentchoice(n_uplet):
-    printHelp("\n Please Enter the probabilities of each subjects and chapters : \n \t -Note that if you put 0 on a SUBJECT or a CHAPTER, no questions will be asked you about that subject \n  Theses are the possible choices \n")
+    printHelp(PROBA_CHOICE_MSG)
     for intitule in n_uplet:
         if "M_" in intitule: 
             print(intitule[2:])
@@ -40,7 +50,7 @@ def chooseSubjectProbabilities(map):
     values=[]
     probabilities=[]
     for key, value in map.items():
-        user_input = input("From 0 to 10, how likely do you want to get the subject : " + key + "? :> ")
+        user_input = input(THEME_CHOICE_MSG + key + "? :> ")
         user_input = int(user_input)
         values.append(user_input)
     probabilities = utils.distribute_in_probabilties(values)
@@ -59,7 +69,7 @@ def chooseChapterProbabilities(mapchapters,mapSubject):
         print(key)
         for keyy, valuee in value.items():
             if(float(mapSubject[key]) != 0):                
-                user_input = input("From 0 to 10, how likely do you want to get the chapter : " + keyy + " :> ")
+                user_input = input(THEME_CHOICE_MSG + keyy + " :> ")
                 user_input = int(user_input)
                 values.append(user_input)
         probabilities = utils.distribute_in_probabilties(values)
@@ -97,12 +107,23 @@ def printQuestion(message):
 
 def waitUntilReady():
     while(True):
-        if(str(input("(y|n) :>")).upper() == "Y"):
+        if(str(input("(o|n) :>")).upper() == "O"):
             clear()
             break
-    
+
+def printScore(nbPoint,i):
+    if(float(nbPoint/i) < 0.5 and float(nbPoint/i) > 0.4):
+        printWarning("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" :| , Dommage ! ")
+    elif(float(nbPoint/i) > 0.5 and float(nbPoint/i) < 0.80 ):
+        printWarning("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" , Pas mal ! ")
+    elif(float(nbPoint/i) < 0.4):
+        printError("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" , :( Dommage ! ")
+    elif(float(nbPoint/i) > 0.80):
+        printInformation("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" , Bravo  ! ")
+
+
 def wanaQuit():
-    if(str(input(" wanna Quit ? (y|n) :>")).upper() == "Y"):
+    if(str(input(" Voulez vous quitter ? (o|n) :>")).upper() == "O"):
         return True
     else:
         return False
@@ -116,3 +137,21 @@ def clear():
 
 def wait(secs):
     time.sleep(secs)
+
+def getUserAnswer():
+    x=input("I :> ")
+    if(str(x).upper() == "NONE" ):
+        return "None"
+    else:
+        try:
+            eval(parser.expr("\"{0:.2f}\".format(float("+str(x)+"),2)").compile())
+            return parser.expr("\"{0:.2f}\".format(float("+str(x)+"),2)").compile()
+        except:
+            return "None"
+
+def KeyBoardInterruptHandler():
+    print("\n")
+    if(wanaQuit()):
+        return True
+    else:
+        return False

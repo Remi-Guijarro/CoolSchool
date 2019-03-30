@@ -1,17 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
-import math
+from  math import * 
 random.randint.__doc__
 from random import choice
 from random import randint
-from interface import printError
+from utils import *
+from interface import *
 from scipy.integrate import quad
 from sympy import limit,Symbol
 from numpy import arange
 
 LIMIT_MAX = 3000000000000
 LIMIT_MIN = -3000000000000
+TAN_MAXIMUM_GAP_BOUNDS=2
 
 # Générer un Polynôme aléatoire ax²+bx+c
 # ATTENTION Renvoi 3 valeurs a, b, c
@@ -36,8 +38,8 @@ def discriminant(randomPolynomial):
 
 # Calcul racine pour Delta>0
 def positive_root(polynom, delta):
-    x1 = ((-polynom[1]) + math.sqrt(delta)) / (2 * polynom[0])
-    x2 = (-polynom[1] - math.sqrt(delta)) / (2 * polynom[0])
+    x1 = ((-polynom[1]) + sqrt(delta)) / (2 * polynom[0])
+    x2 = (-polynom[1] - sqrt(delta)) / (2 * polynom[0])
     return float("{0:.2f}".format(round(float(x1),2))),float("{0:.2f}".format(round(float(x2),2)))
 
 # Calcul racine pour Delta=0
@@ -94,12 +96,36 @@ def randomIntegralBounds(min=-10,max=10):
         b = t
     return a, b
 
+def randomFloatIntegralBounds(min=-10,max=10):
+    a = 0
+    b = 0
+    while a == b:    
+        a = round(random.uniform(min,max),2)
+        b = round(random.uniform(min,max),2)
+    t = 0
+    if a > b:
+        t = a
+        a = b
+        b = t
+    return a, b
+
+
 #Integral Puissance question 2.1.a -> c, d, alpha random value in A (with exceptions)
 def randomPowValues_a():
     c = choice([i for i in range(-10,10) if i not in [0]])
     d = randint(-10,10)
     alpha = choice([i for i in range(-10,10) if i not in [-1]])
     return c, d, alpha
+
+
+def get_tanIntegralVariables():
+    while(True):        
+        min_=get_rand();
+        c=randomTrigo() 
+        (a,b)=randomFloatIntegralBounds(min_,min_+(TAN_MAXIMUM_GAP_BOUNDS/(c/2)))
+        if(not isHomoGraphicalF_NotContinuous("cos("+str(c)+"*x)",(a,b))):
+            return a,b,c
+
 
 def powResolve_a(bounds,c_d_alpha):
     a,b=bounds
@@ -117,7 +143,7 @@ def randomPowValues_b(bounds):
 def powResolve_b(bounds,c):
     if(computeLimitFunction(bounds,str("1/(x"+" -"+str(c)+")"))):
         return "none"
-    I = math.log(abs(bounds[1]-c)) - math.log(abs(bounds[0]-c))
+    I = log(abs(bounds[1]-c)) - log(abs(bounds[0]-c))
     return "{0:.2f}".format(float(I),2)
 
 def randomTrigo():
@@ -128,27 +154,27 @@ def trigoCosResolve(bounds,c):
     I = 0
     if(computeLimitFunction(bounds,str("cos("+str(c)+"*x)"))):
         return "none"
-    I = (math.sin(bounds[1]*c) - math.sin(bounds[0]*c)) / c
+    I = (sin(bounds[1]*c) - sin(bounds[0]*c)) / c
     return "{0:.2f}".format(float(I),2)
 
 def trigoSinResolve(bounds,c):
     I = 0
     if(computeLimitFunction(bounds,str("sin("+str(c)+"*x)"))):
         return "none"
-    I = - (math.cos(bounds[1]*c) - math.cos(bounds[0]*c)) / c
+    I = - (cos(bounds[1]*c) - cos(bounds[0]*c)) / c
     return "{0:.2f}".format(float(I),2)
 
 def trigoTanResolve(bounds,c):
     I = 0
     A = bounds[0]*c
     B = bounds[1]*c
-    if(computeLimitFunction(bounds,str("tan("+str(c)+"*x)"))):
+    if(isHomoGraphicalF_NotContinuous("tan("+str(c)+"*x)",bounds)):
         return "none"
-    I = (math.log(abs(math.cos(B))) - (math.log(abs(math.cos(A))))) / c 
+    I = -(log(abs(cos(B))) - (log(abs(cos(A))))) / c 
     return "{0:.2f}".format(float(I),2)
 #TEST
-# gg = math.log(abs(math.cos(-2)))
-# ggg = math.cos(2)
+# gg = log(abs(cos(-2)))
+# ggg = cos(2)
 
 # print(gg)
 # print(ggg)
@@ -163,17 +189,19 @@ def trigoTanResolve(bounds,c):
 # print("Cosinus = ",round(g,2))
 # h = trigoTanResolve(billout,t)
 # print("Tangente = ", round(h,2))
-# print(math.tan(t))
+# print(tan(t))
 
 def computeLimitFunction(bounds,function):
-    animation = "|/-\\"
+    print('Loading', end='\n\r')
     idx = 0
-    for i in arange(int(bounds[0]),int(bounds[1]),0.1):        
+    for i in arange(int(bounds[0]),int(bounds[1]),0.1):
+        animation = "|/-\\"
         print(animation[idx % len(animation)], end="\r")
-        idx += 1
-        if (str(limit(function,Symbol("x"),i)) == "oo" or float(limit(function,Symbol("x"),i)) > LIMIT_MAX or float(limit(function,Symbol("x"),i)) < LIMIT_MIN ):
+        idx += 1        
+        lim=str(limit(function,Symbol("x"),i))
+        if (lim == "oo" or float(lim) > LIMIT_MAX or float(lim) < LIMIT_MIN ):
             return True
-
+            
 # Log function | random value for c (contraintes spéciale)
 def randomLog():
     c = random.uniform(0.5, 10.5)
@@ -181,21 +209,29 @@ def randomLog():
     return c
 
 # def logResolve(bounds,c):
-#     I = (bounds[1]*(math.log1p(bounds[1]*c))) - (bounds[0]*(math.log1p(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
+#     I = (bounds[1]*(log1p(bounds[1]*c))) - (bounds[0]*(log1p(bounds[0]*c))) - (c*(bounds[1]-bounds[0]))
 #     return I
 
 
 def logResolve(bounds,c):
     def logReturnFunction(x):
-        return math.log(c*x)
+        return log(c*x)
     I,J = quad(logReturnFunction,bounds[0],bounds[1])
     return "{0:.2f}".format(float(I-J),2)  
 
-# test = randomLog()
-# print(test)
 
-# bornes = randomIntegralBounds()
-# print(bornes)
+def isHomoGraphicalF_NotContinuous(denominator,bounds):
+    x=evalFunctionStatusAt(str(denominator).replace('x',str(bounds[0])))    
+    for i in arange(int(bounds[0]),int(bounds[1]),0.0001):        
+        y = evalFunctionStatusAt(str(denominator).replace('x',str(i)))
+        if(y != x):
+            return True
+        x = y
+    return False
 
-# print(logResolve(bornes,test))
+def evalFunctionStatusAt(function):
+    if(eval(function) >= 0):
+        return True
+    else:
+        return False
 
