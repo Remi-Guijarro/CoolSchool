@@ -5,10 +5,11 @@ from  math import *
 random.randint.__doc__
 from random import choice
 from random import randint
+from sys import exit
 from utils import *
 from interface import *
 from scipy.integrate import quad
-from sympy import limit,Symbol
+from sympy import *
 from numpy import arange
 
 LIMIT_MAX = 3000000000000

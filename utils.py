@@ -1,5 +1,6 @@
 import operator
 import random
+from sys import exit
 import collections
 
 # Return the repartition function for Subjects

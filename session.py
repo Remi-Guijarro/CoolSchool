@@ -1,6 +1,8 @@
 from interface import *
 from  utils import *
 from solver import *
+from sys import exit
+
 
 INTEGRAL_INFO_MESSAGE="\n\n Resolvez cette integral , I : <Votre_reponse> \n\n Les reponses sont attendues avec une precision de 2 digits \n Si l'integral ne converge dans les bornes donnees ecrivez => none \n\n ce programm considere que si la limite d'une fonction a un point donnee depasse 10^11 \n alors l'integral ne converge pas \n"
 POLYNOMIAL_INFO_MESSAGE=" \n\n Si il n'y a pas de racine dans R alors ecrivez : \n x1 :> none \n x2 :> none \n\n Si il n'y a qu'une seul racine ecrivez x1 :> Votre_Reponse \n x2 :> none \n\n Les reponses sont attendues avec une precision de 2 digits"
@@ -139,7 +141,7 @@ def exam_session(subjectsMap,chaptersMap):
             clear()
         printScore(nbPoint,10)
     except KeyboardInterrupt:
-        if(not KeyBoardInterruptHandler()):
+        if(not KeyBoardInterruptHandlerCustom()):
             exam_session(subjectsMap,chaptersMap)
         else:
             exit()  
@@ -179,7 +181,7 @@ def run():
         else:
             printError("Mode is not implemented.")
     except KeyboardInterrupt:
-        if(not KeyBoardInterruptHandler()):
+        if(not KeyBoardInterruptHandlerCustom()):
             run()
         else:
             exit()

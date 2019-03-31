@@ -5,6 +5,7 @@ COLORAMA=false
 SYMPY=false
 NUMPY=false
 SCIPY=false
+PYINSTALLER=false
 
 echo "Scanning system for required libraries..."
 
@@ -17,6 +18,8 @@ for PIP_LIST_OUTPUT in `pip3 list --format=columns`; do
 		NUMPY=true
 	elif [ "$PIP_LIST_OUTPUT" == "scipy" ]; then
 		SCIPY=true
+	elif [ "$PIP_LIST_OUTPUT" == "pyinstaller" ]; then
+		PYINSTALLER=true
 	fi
 done
 
@@ -31,6 +34,9 @@ if [ $NUMPY == false ]; then
 fi
 if [ $SCIPY == false ]; then
 	PROGRAMS+="scipy "
+fi
+if [ $PYINSTALLER == false ]; then
+	PROGRAMS+="pyinstaller "
 fi
 
 if [ ! -z "$PROGRAMS" ]; then

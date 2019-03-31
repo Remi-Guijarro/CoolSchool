@@ -4,6 +4,7 @@ import utils
 import time
 import parser
 from math import * 
+from sys import exit
 
 PROBA_CHOICE_MSG="\n Veuillez entrer les probabilites de chaque sujets et chapitres : \n \t -Notez que si vous assigner  0 sur un sujet ou un  chapitre, aucune question en vous seront poser sur ces sujets ou themes \n Voici les choix possibles \n"
 THEME_CHOICE_MSG="De 0 a 10, notez votre preference sur ce theme : "
@@ -149,7 +150,8 @@ def getUserAnswer():
         except:
             return "None"
 
-def KeyBoardInterruptHandler():
+
+def KeyBoardInterruptHandlerCustom():
     print("\n")
     if(wanaQuit()):
         return True

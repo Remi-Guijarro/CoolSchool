@@ -4,7 +4,7 @@ block_cipher = None
 
 
 a = Analysis(['CoolSchool.py'],
-             pathex=['C:\\Users\\remig\\Documents\\ensiie\\projets\\maths_python\\CoolSchool'],
+             pathex=['/home/remi/Documents/ENSIIE/CoolSchool'],
              binaries=[],
              datas=[],
              hiddenimports=[],
