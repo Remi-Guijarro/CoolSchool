@@ -195,7 +195,7 @@ def trigoTanResolve(bounds,c):
 def computeLimitFunction(bounds,function):
     print('Chargement', end='\n\r')
     idx = 0
-    for i in arange(int(bounds[0]),int(bounds[1]),0.1):
+    for i in arange(int(bounds[0]),int(bounds[1]),0.3):
         animation = "|/-\\"
         print(animation[idx % len(animation)], end="\r")
         idx += 1        

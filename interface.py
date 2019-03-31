@@ -99,11 +99,11 @@ def printWarning(message):
 
 # Print an Help message (COLOR = LIGHTGREEN)
 def printHelp(message):
-    print(Fore.LIGHTGREEN_EX + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
+    print(Fore.GREEN + MSG_PREFIX + str(message) + MSG_SUFFIX + "\n")
     print(Fore.RESET)
 
 def printQuestion(message):
-    print("Q : " + Fore.LIGHTYELLOW_EX + str(message) + "\n")
+    print("Q : " + Fore.BLUE + str(message) + "\n")
     print(Fore.RESET)
 
 def waitUntilReady():
