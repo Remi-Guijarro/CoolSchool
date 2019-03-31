@@ -1,0 +1,7 @@
+.top_header{
+    text-align: center;
+    background-image: linear-gradient(to top,white, #f7eaf2);  
+    -webkit-box-shadow: 2px 24px 41px -29px rgba(0,0,0,0.75);
+    -moz-box-shadow: 2px 24px 41px -29px rgba(0,0,0,0.75);
+    box-shadow: 2px 24px 41px -29px rgba(0,0,0,0.75);
+}
