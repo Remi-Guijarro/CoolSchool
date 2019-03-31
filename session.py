@@ -59,14 +59,13 @@ def randchapters(subject_name,chaptersMap):
 
 def compareSolutions(result,x):
     if(result == str(x).strip()):
-        printInformation("Good !")
+        printInformation("Bien !")
         return True
     else:
-        printError("result was " + str(result))
+        printError("Le résultat était " + str(result))
         return False
 
 # Should return a random question according to the chapters given and their probabilities
-#To do
 def computeQuestion(theme):
     if(theme.strip().upper() == "SECONDDEGRE"):
         (a,b,c)=randomPolynomial()
@@ -135,7 +134,10 @@ def exam_session(subjectsMap,chaptersMap):
             chapter=randchapters(subject,chaptersMap)
             printInformation(chapter)
             if(computeQuestion(str(chapter).replace(" ","",1).upper())):
-                nbPoint+=1       
+	            if (chapter == "Fonctions logarithmiques"):
+	            	nbPoint+=1.5
+	            else:
+	            	nbPoint+=1     
             waitUntilReady()
             clear()
         printScore(nbPoint,10)
@@ -157,7 +159,10 @@ def trainning_session(subjectsMap,chaptersMap):
         chapter=randchapters(subject,chaptersMap)
         printInformation(chapter)
         if(computeQuestion(str(chapter).replace(" ","",1).upper())):
-            nbPoint+=1
+            if (chapter == "Fonctions logarithmiques"):
+            	nbPoint+=1.5
+            else:
+            	nbPoint+=1
         if(wanaQuit()): 
             print(cpt)   
             printScore(nbPoint,cpt)
@@ -179,6 +184,9 @@ def run():
             trainning_session(subjectsMap,chaptersMap)
         else:
             printError("Mode is not implemented.")
+
+    	if(str(input(" Nouvelle session ? (o|n) :>")).upper() == "O"):
+        	return run()
     except KeyboardInterrupt:
         if(not KeyBoardInterruptHandlerCustom()):
             run()

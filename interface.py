@@ -11,7 +11,7 @@ THEME_CHOICE_MSG="De 0 a 10, notez votre preference sur ce theme : "
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
 MODE1="EXAM"
-MODE2="ENTRAINNEMENT"
+MODE2="ENTRAINEMENT"
 HELP="AIDE"
 MODE_NOT_EXIST_ERROR="Ce mode m'existe pas ou pas encore"
 HELP_MODE_MESSAGE="\n Examen : Une serie de 10 questions \n Entrainement : un mode sans fin ou vous decidez de vous arreter quand vous le voulez \n"
@@ -118,7 +118,6 @@ def printScore(nbPoint,i):
         printError("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" , :( Dommage ! ")
     elif(float(nbPoint/i) > 0.80):
         printInformation("Vous avez eu "+ str(nbPoint) + " /"+str(i)+" , Bravo  ! ")
-
 
 def wanaQuit():
     if(str(input(" Voulez vous quitter ? (o|n) :>")).upper() == "O"):
