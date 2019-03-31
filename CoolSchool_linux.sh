@@ -18,7 +18,7 @@ for PIP_LIST_OUTPUT in `pip3 list --format=columns`; do
 		NUMPY=true
 	elif [ "$PIP_LIST_OUTPUT" == "scipy" ]; then
 		SCIPY=true
-	elif [ "$PIP_LIST_OUTPUT" == "pyinstaller" ]; then
+	elif [ "$PIP_LIST_OUTPUT" == "PyInstaller" ]; then
 		PYINSTALLER=true
 	fi
 done
