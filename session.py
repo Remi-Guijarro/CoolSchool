@@ -184,9 +184,8 @@ def run():
             trainning_session(subjectsMap,chaptersMap)
         else:
             printError("Mode is not implemented.")
-
-    	if(str(input(" Nouvelle session ? (o|n) :>")).upper() == "O"):
-        	return run()
+        if(str(input("Nouvelle session ? (O|N) ")).upper()  == "O"):
+            run()
     except KeyboardInterrupt:
         if(not KeyBoardInterruptHandlerCustom()):
             run()
