@@ -43,7 +43,7 @@ if [ ! -z "$PROGRAMS" ]; then
 	pip3 install $PROGRAMS
 else
 	echo "All libraries already installed."
-	echo "Press a key to continue..."
+	echo "Press ENTER to continue..."
 	read
 fi
 

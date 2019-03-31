@@ -72,7 +72,7 @@ def polynomSolution(polynome, answer):
         if (str(root[0]).upper() == str(answer[0]).upper() ) and (str(root[1]).upper() == str(answer[1]).upper() ) or (str(root[0]).upper() == str(answer[1]).upper() ) and ( str(root[1]).upper() == str(answer[0]).upper() ):
             solu = True
         else:
-            printError("The solution was :> "+ str(root[0]) + "  " +str(root[1])) 
+            printError("La solution etait :> "+ str(root[0]) + "  " +str(root[1])) 
             solu = False
     else:     
         if (str("{0:.2f}".format(round(float(root[0]),2))) == str(answer[0])) and ( str("{0:.2f}".format(round(float(root[1]),2))) == str(answer[1])) or  (str("{0:.2f}".format(round(float(root[0]),2))) == str(answer[1])) and ( str("{0:.2f}".format(round(float(root[1]),2))) == str(answer[0])):
@@ -193,7 +193,7 @@ def trigoTanResolve(bounds,c):
 # print(tan(t))
 
 def computeLimitFunction(bounds,function):
-    print('Loading', end='\n\r')
+    print('Chargement', end='\n\r')
     idx = 0
     for i in arange(int(bounds[0]),int(bounds[1]),0.1):
         animation = "|/-\\"

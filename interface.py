@@ -6,7 +6,7 @@ import parser
 from math import * 
 from sys import exit
 
-PROBA_CHOICE_MSG="\n Veuillez entrer les probabilites de chaque sujets et chapitres : \n \t -Notez que si vous assigner  0 sur un sujet ou un  chapitre, aucune question en vous seront poser sur ces sujets ou themes \n Voici les choix possibles \n"
+PROBA_CHOICE_MSG="\n Veuillez saisir votre preference pour chaques sujets et chapitres : \n \t -Notez que si vous assignez 0 sur un sujet ou un chapitre, aucune question en vous sera posée sur ce sujet ou chapitre \n Voici les choix possibles \n"
 THEME_CHOICE_MSG="De 0 a 10, notez votre preference sur ce theme : "
 MSG_PREFIX="========== "
 MSG_SUFFIX=" =========="
@@ -14,7 +14,7 @@ MODE1="EXAM"
 MODE2="ENTRAINNEMENT"
 HELP="AIDE"
 MODE_NOT_EXIST_ERROR="Ce mode m'existe pas ou pas encore"
-HELP_MODE_MESSAGE="\n Examen : Une serie de 10 questions \n Entrainnement : un mode sans fin ou vous decidez de vous arreter quand vous le voulez \n"
+HELP_MODE_MESSAGE="\n Examen : Une serie de 10 questions \n Entrainement : un mode sans fin ou vous decidez de vous arreter quand vous le voulez \n"
 
 #  return True if Exam mode have been choosed False otherwise
 def chooseMode():
@@ -107,10 +107,7 @@ def printQuestion(message):
     print(Fore.RESET)
 
 def waitUntilReady():
-    while(True):
-        if(str(input("(o|n) :>")).upper() == "O"):
-            clear()
-            break
+	input("Appuyez sur ENTREE pour continuer...")
 
 def printScore(nbPoint,i):
     if(float(nbPoint/i) < 0.5 and float(nbPoint/i) > 0.4):

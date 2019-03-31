@@ -4,8 +4,8 @@ from solver import *
 from sys import exit
 
 
-INTEGRAL_INFO_MESSAGE="\n\n Resolvez cette integral , I : <Votre_reponse> \n\n Les reponses sont attendues avec une precision de 2 digits \n Si l'integral ne converge dans les bornes donnees ecrivez => none \n\n ce programm considere que si la limite d'une fonction a un point donnee depasse 10^11 \n alors l'integral ne converge pas \n"
-POLYNOMIAL_INFO_MESSAGE=" \n\n Si il n'y a pas de racine dans R alors ecrivez : \n x1 :> none \n x2 :> none \n\n Si il n'y a qu'une seul racine ecrivez x1 :> Votre_Reponse \n x2 :> none \n\n Les reponses sont attendues avec une precision de 2 digits"
+INTEGRAL_INFO_MESSAGE="\n\n Resolvez cette integrale \n\n Les reponses sont attendues avec un arrondi au centieme. \n Si l'integrale ne converge pas dans les bornes donnees ecrivez => none \n\n Ce programme considere que si la limite d'une fonction a un point donnee depasse 10^11 \n alors l'integrale ne converge pas. \n"
+POLYNOMIAL_INFO_MESSAGE=" \n\n S'il n'y a pas de racine dans R alors ecrivez : \n x1 :> none \n x2 :> none \n\n S'il n'y a qu'une seul racine ecrivez x1 :> Votre_Reponse \n x2 :> none \n\n Les reponses sont attendues avec une precision au centieme."
 # initialize a dictionnary <String, Int>  <==>  <Subject, probability>  with the probabilities at 0
 def constructIntituleMa(array):
     matArray=[]
@@ -71,7 +71,7 @@ def computeQuestion(theme):
     if(theme.strip().upper() == "SECONDDEGRE"):
         (a,b,c)=randomPolynomial()
         printInformation(POLYNOMIAL_INFO_MESSAGE)
-        printQuestion("Quel sont les racines du polynome suivant : "+format_polynome((a,b,c))) 
+        printQuestion("Quelles sont les racines du polynome suivant : "+format_polynome((a,b,c))) 
         x1=input("x1 :> ")
         x2=input("x2 :> ")
         if(polynomSolution((a,b,c),(x1,x2))):
@@ -83,14 +83,14 @@ def computeQuestion(theme):
             (a,b)=randomIntegralBounds()
             (c,d,alpha)=randomPowValues_a()
             printWarning(INTEGRAL_INFO_MESSAGE)
-            printQuestion(str("("+str(c)+"x -" + str(d) + ")^"+str(alpha)).replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            printQuestion(str("("+str(c)+"x -" + str(d) + ")^"+str(alpha)).replace("--","+",1) + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))
             result =powResolve_a((a,b),(c,d,alpha)) 
             return compareSolutions(result,eval(getUserAnswer()))
         else:
             (a,b)=randomIntegralBounds()
             c=randomPowValues_b((a,b))
             printWarning(INTEGRAL_INFO_MESSAGE)
-            printQuestion(str("1/(x-"+str(c)+")").replace("--","+",1) + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            printQuestion(str("1/(x-"+str(c)+")").replace("--","+",1) + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))
             result =powResolve_b((a,b),c) 
             return compareSolutions(result,eval(getUserAnswer()))
     elif(theme.strip().upper() == "FONCTIONSTRIGONOMETRIQUES"):
@@ -99,27 +99,27 @@ def computeQuestion(theme):
             (a,b)=randomIntegralBounds()
             c=randomTrigo()
             printWarning(INTEGRAL_INFO_MESSAGE)
-            printQuestion(str("cos("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            printQuestion(str("cos("+str(c)+"x)") + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))
             result =trigoCosResolve((a,b),c) 
             return compareSolutions(result,eval(getUserAnswer()))
         elif(x < 0.66):
             (a,b)=randomIntegralBounds()
             c=randomTrigo()
             printWarning(INTEGRAL_INFO_MESSAGE)
-            printQuestion(str("sin("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            printQuestion(str("sin("+str(c)+"x)") + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))
             result =trigoSinResolve((a,b),c) 
             return compareSolutions(result,eval(getUserAnswer()))
         else:
             a,b,c=get_tanIntegralVariables()
             printWarning(INTEGRAL_INFO_MESSAGE)
-            printQuestion(str("tan("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))
+            printQuestion(str("tan("+str(c)+"x)") + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))
             result=trigoTanResolve((a,b),c) 
             return compareSolutions(result,eval(getUserAnswer()))
     elif(theme.strip().upper() == "FONCTIONSLOGARITHMIQUES"):
         (a,b)=randomIntegralBounds(0,10)
         c=randomLog()
         printWarning(INTEGRAL_INFO_MESSAGE)
-        printQuestion(str("ln("+str(c)+"x)") + "\t Betwwen bounds " + str(a) + " To " + str(b))        
+        printQuestion(str("ln("+str(c)+"x)") + "\t Borne inferieure: " + str(a) + ", borne superieure: " + str(b))        
         result=logResolve((a,b),c) 
         return compareSolutions(result,eval(getUserAnswer()))
 # run the game in exam session
@@ -135,8 +135,7 @@ def exam_session(subjectsMap,chaptersMap):
             chapter=randchapters(subject,chaptersMap)
             printInformation(chapter)
             if(computeQuestion(str(chapter).replace(" ","",1).upper())):
-                nbPoint+=1
-            printInformation("Pret pour une autre question ? ")        
+                nbPoint+=1       
             waitUntilReady()
             clear()
         printScore(nbPoint,10)
@@ -148,7 +147,7 @@ def exam_session(subjectsMap,chaptersMap):
 
 # Run the game in trainning session
 def trainning_session(subjectsMap,chaptersMap):
-    printInformation("Running in trainning mode")
+    printInformation("Mode entrainement")
     nbPoint=0
     cpt=1
     while(True):    
