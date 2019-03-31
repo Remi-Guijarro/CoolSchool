@@ -31,22 +31,29 @@ foo@bar:~$  pyinstaller CoolSchool.py
 > Those are the supported mathematics themes
 ### Second degree equation
 
-> You should solve : $$	f(x) = ax^2 + bx + x $$ $$ f(x) = 0 $$
+> You should solve : 
+$$	f(x) = ax^2 + bx + x $$ $$ f(x) = 0 $$
 
 ### Integrales power functions
 
-> You should solve : __$$ \int_a^b (cx - d)^\alpha dx. $$__  __$$ \int_a^b \frac{1}{(x-c)} dx. $$__
+> You should solve : 
+$$ \int_a^b (cx - d)^\alpha dx. $$  
+$$ \int_a^b \frac{1}{(x-c)} dx. $$
 
 
 
 ### Integrales trigonometric functions
 
-> You should solve : $$ \int_a^b cos(cx) dx. $$ $$ \int_a^b sin(cx) dx. $$  $$ \int_a^b tan(cx) dx. $$
+> You should solve : 
+$$ \int_a^b cos(cx) dx. $$ 
+$$ \int_a^b sin(cx) dx. $$ 
+$$ \int_a^b tan(cx) dx. $$
 
 
 ### Integrales logarithmic functions
 
-> You should solve : $$ \int_a^b ln(cx) dx. $$ 
+> You should solve : 
+$$ \int_a^b ln(cx) dx. $$ 
 
 
 _____________
