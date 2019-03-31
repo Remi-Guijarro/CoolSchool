@@ -7,6 +7,7 @@ NUMPY=false
 SCIPY=false
 PYINSTALLER=false
 FLASK=false
+FLASK_WTF=false
 
 echo "Scanning system for required libraries..."
 
@@ -23,6 +24,8 @@ for PIP_LIST_OUTPUT in `pip3 list --format=columns`; do
 		PYINSTALLER=true
 	elif [ "$PIP_LIST_OUTPUT" == "flask" ]; then
 		FLASK=true
+	elif [ "$PIP_LIST_OUTPUT" == "flask-wtf" ]; then
+		FLASK_WTF=true
 	fi
 done
 
@@ -38,11 +41,17 @@ fi
 if [ $SCIPY == false ]; then
 	PROGRAMS+="scipy "
 fi
+
 if [ $PYINSTALLER == false ]; then
 	PROGRAMS+="pyinstaller "
 fi
+
 if [ $FLASK == false ]; then
 	PROGRAMS+="flask "
+fi
+
+if [ $FLASK_WTF == false ]; then
+	PROGRAMS+="flask-wtf "
 fi
 
 if [ ! -z "$PROGRAMS" ]; then

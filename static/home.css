@@ -5,3 +5,26 @@
     -moz-box-shadow: 2px 24px 41px -29px rgba(0,0,0,0.75);
     box-shadow: 2px 24px 41px -29px rgba(0,0,0,0.75);
 }
+
+.global_container{
+    padding: 5%;
+}
+
+.sub_input_group{
+    position: relative;
+    left: 40px;
+}
+
+.sub_theme{
+    position: relative;
+    right: -80px;   
+}
+
+.theme{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.sub_theme{
+    font-size: 1.5em;
+}

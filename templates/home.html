@@ -14,15 +14,34 @@
             CoolSchool
         </a>
     </nav>
-    {% for key,value in chapters.items() %}
-        <h1>{{key}}</h1>
-        <br>         
-        {% for subchapter in value %}
-            <h2>{{subchapter}}</h2>
-            <br>
+    <section class="col global_container">
+        {% for key,value in chapters.items() %}
+            <section class="row">
+                    <h1 class="row theme">{{key}}</h1>
+                    <div class="input-group mb-3 row">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">Probability</span>
+                            </div>
+                            <input type="text" class="form-control col-2" placeholder="0." aria-label="Username" aria-describedby="basic-addon1">
+                    </div>
+            </section>
+            
+            <br>         
+            {% for subchapter in value %}
+                <section class="col">
+                        <h2 class="col-4 sub_theme row">{{subchapter}}</h2>
+                        <div class="input-group mb-3 sub_input_group col-8">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text" id="basic-addon1">Probability</span>
+                                </div>
+                                <input type="text" class="form-control col-2" placeholder="0." aria-label="Username" aria-describedby="basic-addon1">
+                        </div>
+                        <br>
+                </section>                
+            {% endfor %}
+            <br>    
         {% endfor %}
-        <br>    
-    {% endfor %}
+    </section> 
 </body>
 </html>
 <script  src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>

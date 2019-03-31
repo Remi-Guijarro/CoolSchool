@@ -5,6 +5,7 @@ pip install sympy
 pip install numpy
 pip install pyinstaller
 pip install flask
+pip install flask-wtf
 cls
 
 echo 
