@@ -39,7 +39,7 @@ Find below the supported mathematics themes with examples.
 
 ![equation](https://latex.codecogs.com/gif.latex?%24%24%20f%28x%29%20%3D%20ax%5E2%20&plus;%20bx%20&plus;%20x%20%24%24%20%24%24%20f%28x%29%20%3D%200%20%24%24)
 
-### Integrales power functions
+### Integral: Power functions 
 
 > Solve : 
 
@@ -48,7 +48,7 @@ Find below the supported mathematics themes with examples.
 
 
 
-### Integrales trigonometric functions
+### Integral: trigonometric functions
 
 > Solve : 
 
@@ -56,7 +56,7 @@ Find below the supported mathematics themes with examples.
 
 
 
-### Integrales logarithmic functions
+### Integral: logarithmic functions
 
 > Solve : 
 
